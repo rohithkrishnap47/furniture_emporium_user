@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div class="col-2 position-relative">
+        <picture class="d-block border">
+            <img class="img-fluid" src="${element.images[0]}" alt="F-Empo">
+        </picture>
+    </div>
+    <div class="col-9 offset-1">
+        <div>
+            <h6 class="justify-content-between d-flex align-items-start mb-2">
+                ${element.name}
+                <i class="ri-close-line ms-3"></i>
+            </h6>
+            <span class="d-block text-muted fw-bolder text-uppercase fs-9">
+                <label for="quantity">Qty:</label>
+                <select id="quantity" name="quantity">
+                    <!-- JavaScript loop to generate options from 1 to 10 -->
+                </select>
+            </span>
+        </div>
+        <p class="fw-bolder text-end text-muted m-0">₹${element.price}</p>
+    </div>
+</body>
+
+</html>

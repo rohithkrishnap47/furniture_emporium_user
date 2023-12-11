@@ -955,9 +955,19 @@
             });
         }
         // SEARCH-BOX
+
+        const params = new URLSearchParams(window.location.search);
+        const qsearch = params.get("search");
+
+        // Set the initial value of the search input
+        const searchInput = document.getElementById("productSearch");
+        searchInput.value = qsearch || '';
+
+        // Call searchProducts function initially
+        searchProducts();
         async function searchProducts() {
             event.preventDefault();
-            const search = document.getElementById("productSearch").value;
+            const search = searchInput.value;
 
             try {
                 const response = await fetch(`http://localhost:5001/product/productsAll?name=${search}`);
@@ -1073,29 +1083,34 @@
         }
 
         const minPrice = document.getElementById("minvalue");
-        const minPriceValue = document.getElementById("minvalue").value;
+        // const minPriceValue = document.getElementById("minvalue").value;
+        let minPriceValue = 0
         const maxPrice = document.getElementById("maxvalue");//changed here
-        const maxPriceValue = document.getElementById("maxvalue").value;
+        // const maxPriceValue = document.getElementById("maxvalue").value;
+        let maxPriceValue=0
 
         console.log("minValue", minPriceValue)
 
         minPrice.addEventListener("change", (e) => {
             const value = e.target.value;
             console.log("price", value)
+            minPriceValue=value
             filterPrice({ min: value })
         })
         maxPrice.addEventListener("change", (e) => {
             const value = e.target.value;
             console.log("price", value)
+            maxPriceValue=value
             filterPrice({ max: value })
         })
+
 
         async function filterPrice(price) {
             let value;
             if (price.min) {
-                value = `minvalue=${price.min}&maxvalue=${maxPrice}`
+                value = `minvalue=${price.min}&maxvalue=${maxPriceValue}`
             } else {
-                value = `maxvalue=${price.max}&minvalue=${minPrice}`
+                value = `maxvalue=${price.max}&minvalue=${minPriceValue}`
             }
             try {
                 const response = await fetch(`http://localhost:5001/product/productsAll?${value}`);

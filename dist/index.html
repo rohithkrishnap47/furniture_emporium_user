@@ -1274,9 +1274,10 @@
         // search box INDEX
         async function searchProducts() {
             event.preventDefault();
-            window.location.href="http://localhost:5508/dist/all_products.html"
+            const productSearch = document.getElementById("productSearch").value
+            window.location.href=`http://127.0.0.1:5508/dist/all_products.html?search=${productSearch}`
+            
             try {
-                
                 // const response = await fetch(`http://localhost:5001/product/productsAll?name=${search}`);
                 // const data = await response.json();
 

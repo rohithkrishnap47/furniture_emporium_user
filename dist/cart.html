@@ -259,10 +259,13 @@
                             quantity: selectedQuantity,
                         })
                     })
+                    if(addToCartResponse.ok){
+                        window.location.reload()
+                    }
                     console.log("addToCartResponse", await addToCartResponse.json());
                 });
-
-
+                
+                
                 //remove product
                 const closeElement = document.getElementById("delete");
                 console.log("close", closeElement)
@@ -276,6 +279,9 @@
                         })
                     })
                     const data = await removeProduct.json()
+                    if(removeProduct.ok){
+                        window.location.reload()
+                    }
                     console.log("data", data)
                 })
 
@@ -294,6 +300,7 @@
                             </div>
                             <p class="m-0 fs-5 fw-bold">₹${cartInfo.totalPrice}</p>
                         </div>`;
+
             priceContainer.appendChild(priceTot);
         }
 

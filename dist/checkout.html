@@ -196,9 +196,9 @@
         </div>
         <div class="col-12 col-lg-5 bg-light pt-lg-10 aside-checkout pb-5 pb-lg-0 my-5 my-lg-0">
           <div class="p-4 py-lg-0 pe-lg-0 ps-lg-5">
-            <div class="pb-3">
+            <div class="pb-3" id="cartlisting">
               <!-- Cart Item-->
-              <div class="row mx-0 py-4 g-0 border-bottom">
+              <!-- <div class="row mx-0 py-4 g-0 border-bottom">
                 <div class="col-2 position-relative">
                   <span class="checkout-item-qty">3</span>
                   <picture class="d-block border">
@@ -216,9 +216,10 @@
                   </div>
                   <p class="fw-bolder text-end text-muted m-0">$85.00</p>
                 </div>
-              </div> <!-- / Cart Item-->
+              </div> -->
+              <!-- / Cart Item-->
               <!-- Cart Item-->
-              <div class="row mx-0 py-4 g-0 border-bottom">
+              <!-- <div class="row mx-0 py-4 g-0 border-bottom">
                 <div class="col-2 position-relative">
                   <span class="checkout-item-qty">3</span>
                   <picture class="d-block border">
@@ -236,8 +237,10 @@
                   </div>
                   <p class="fw-bolder text-end text-muted m-0">$125.00</p>
                 </div>
-              </div> <!-- / Cart Item-->
+              </div> -->
+               <!-- / Cart Item-->
             </div>
+            <!-- PRICE -->
             <div class="py-4 border-bottom">
               <div class="d-flex justify-content-between align-items-center mb-2">
                 <p class="m-0 fw-bolder fs-6">Subtotal</p>
@@ -280,8 +283,10 @@
   <script src="./assets/js/theme.bundle.js"></script>
 
   <script>
+    // Get-Data-From-user
     async function shippingdata() {
       try {
+        event.preventDefault()
         const firstName = document.getElementById("firstName")
         const lastName = document.getElementById("lastName")
         const address = document.getElementById("address")
@@ -311,6 +316,63 @@
 
       }
     }
+    //  show-cart
+    function showCartItems() {
+      if (!token) {
+        console.error('Authorization token not found');
+        return;
+      }
+
+
+      fetch('http://localhost:5001/cart/showcart', {
+        method: 'GET',
+        headers: headers,
+      })
+        .then(response => response.json())
+        .then(data => {
+          const cartInfo = data;
+          const cart = data.cartProducts;
+
+          products = cart;
+          setData(cart);
+          setTotal(cartInfo);
+        })
+        .catch(error => {
+          console.error('Error:', error);
+        });
+    }
+
+    // Show-Data
+    function setData(products) {
+            const productnContainer = document.getElementById("cartlisting");
+            // Clear existing content in the banner container
+            productnContainer.innerHTML = "";
+            products.forEach(element => {
+                console.log("element:", element);
+                const productCard = document.createElement("div");
+                productCard.className = "row mx-0 py-4 g-0 border-bottom";
+                productCard.innerHTML = `
+                <div class="col-2 position-relative">
+                  <span class="checkout-item-qty">3</span>
+                  <picture class="d-block border">
+                    <img class="img-fluid" src="${element.images[0]}"
+                      alt="F-Empo">
+                  </picture>
+                </div>
+                <div class="col-9 offset-1">
+                  <div>
+                    <h6 class="justify-content-between d-flex align-items-start mb-2">
+                      ${element.name}
+                      <i class="ri-close-line ms-3"></i>
+                    </h6>
+                    <span class="d-block text-muted fw-bolder text-uppercase fs-9">Size: 9 / Qty: 1</span>
+                  </div>
+                  <p class="fw-bolder text-end text-muted m-0">$85.00</p>
+                </div>`;
+
+                productnContainer.appendChild(productCard);
+          });
+        }
   </script>
 </body>
 

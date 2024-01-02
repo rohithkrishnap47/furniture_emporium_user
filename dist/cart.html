@@ -155,7 +155,18 @@
                     </div>
                     <a href="./checkout.html" class="btn btn-dark w-100 text-center" role="button">Proceed to
                         checkout</a>
+                    <div
+                        style="display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100px; padding-top: 20px;">
+                        <button
+                            style="padding: 0.6em 1em; border: 4px solid #000000; transition: ease-in-out 0.3s; background-color: transparent; color: #000000; font-weight: bolder; font-size: 16px;"
+                            onmouseover="this.style.transform='scale(1.2) rotate(10deg)'; this.style.backgroundColor='#000000'; this.style.color='white';"
+                            onmouseout="this.style.transform=''; this.style.backgroundColor='transparent'; this.style.color='#000000';">
+                            COUPON HERE</button>
+                    </div>
+
                 </div>
+
+
             </div>
         </div>
         </div>
@@ -259,13 +270,13 @@
                             quantity: selectedQuantity,
                         })
                     })
-                    if(addToCartResponse.ok){
+                    if (addToCartResponse.ok) {
                         window.location.reload()
                     }
                     console.log("addToCartResponse", await addToCartResponse.json());
                 });
-                
-                
+
+
                 //remove product
                 const closeElement = document.getElementById("delete");
                 console.log("close", closeElement)
@@ -279,7 +290,7 @@
                         })
                     })
                     const data = await removeProduct.json()
-                    if(removeProduct.ok){
+                    if (removeProduct.ok) {
                         window.location.reload()
                     }
                     console.log("data", data)

@@ -120,35 +120,35 @@
                   <!-- First Name-->
                   <div class="col-sm-6">
                     <div class="form-group">
-                      <label for="firstName" class="form-label">First name</label>
-                      <input type="text" class="form-control" id="firstName" placeholder="" value="" required="">
+                      <label  class="form-label">First name</label>
+                      <input type="text" class="form-control" id="firstName" placeholder="" required>
                     </div>
                   </div>
 
                   <!-- Last Name-->
                   <div class="col-sm-6">
                     <div class="form-group">
-                      <label for="lastName" class="form-label">Last name</label>
-                      <input type="text" class="form-control" id="lastName" placeholder="" value="" required="">
+                      <label  class="form-label">Last name</label>
+                      <input type="text" class="form-control" id="lastName" placeholder="" required>
                     </div>
                   </div>
 
                   <!-- Address-->
                   <div class="col-12">
                     <div class="form-group">
-                      <label for="address" class="form-label">Address</label>
+                      <label  class="form-label">Address</label>
                       <input type="text" class="form-control" id="address" placeholder="Enter your valid address"
-                        required="">
+                        required>
                     </div>
                   </div>
 
                   <!-- Country-->
                   <div class="col-md-12">
                     <div class="form-group">
-                      <label for="country" class="form-label">Country</label>
-                      <select class="form-select" id="country" required="">
-                        <option disabled selected value="">Please Select...</option>
-                        <option>India</option>
+                      <label  class="form-label">Country</label>
+                      <select class="form-select" id="country" required>
+                        <option disabled selected>Please Select...</option>
+                        <option value="india">India</option>
                       </select>
                     </div>
                   </div>
@@ -156,14 +156,14 @@
                   <!-- State-->
                   <div class="col-md-6">
                     <div class="form-group">
-                      <label for="state" class="form-label">State</label>
-                      <select class="form-select" id="state" required="">
-                        <option disabled selected value="">Please Select...</option>
-                        <option>Andhra Pradesh</option>
-                        <option>Karnataka</option>
-                        <option>Kerala</option>
-                        <option>Tamil Nadu</option>
-                        <option>Telangana</option>
+                      <label  class="form-label">State</label>
+                      <select class="form-select" id="state" required>
+                        <option disabled selected>Please Select...</option>
+                        <option value="ap">Andhra Pradesh</option>
+                        <option value="ka">Karnataka</option>
+                        <option value="kl">Kerala</option>
+                        <option value="tn">Tamil Nadu</option>
+                        <option value="tl">Telangana</option>
                       </select>
                     </div>
                   </div>
@@ -171,8 +171,8 @@
                   <!-- Post Code-->
                   <div class="col-md-6">
                     <div class="form-group">
-                      <label for="zip" class="form-label">PinCode</label>
-                      <input type="text" class="form-control" id="pincode" placeholder="" required="">
+                      <label  class="form-label">PinCode</label>
+                      <input type="text" class="form-control" id="pincode" placeholder="" required>
                     </div>
                   </div>
 
@@ -187,8 +187,9 @@
                 </div>
               </div>
 
-              <div class="pt-5 mt-5 pb-5 border-top d-flex justify-content-md-end align-items-center">
-                <a href="./checkout-shipping.html" class="btn btn-dark w-100 w-md-auto" role="button">Proceed to
+              <div onclick="addshippingdata()"
+                class="pt-5 mt-5 pb-5 border-top d-flex justify-content-md-end align-items-center">
+                <a class="btn btn-dark w-100 w-md-auto" role="button">Proceed to
                   shipping</a>
               </div>
             </div>
@@ -238,7 +239,7 @@
                   <p class="fw-bolder text-end text-muted m-0">$125.00</p>
                 </div>
               </div> -->
-               <!-- / Cart Item-->
+              <!-- / Cart Item-->
             </div>
             <!-- PRICE -->
             <div class="py-4 border-bottom">
@@ -283,20 +284,26 @@
   <script src="./assets/js/theme.bundle.js"></script>
 
   <script>
+
+    const token = localStorage.getItem('token');
+    const headers = {
+      'Authorization': `Bearer ${token}`,
+      'Content-Type': 'application/json'
+    };
     // Get-Data-From-user
-    async function shippingdata() {
+    async function addshippingdata() {
       try {
-        event.preventDefault()
-        const firstName = document.getElementById("firstName")
-        const lastName = document.getElementById("lastName")
-        const address = document.getElementById("address")
-        const country = document.getElementById("country")
-        const state = document.getElementById("state")
-        const pincode = document.getElementById("pincode")
+        // event.preventDefault()
+        const firstName = document.getElementById("firstName").value
+        const lastName = document.getElementById("lastName").value
+        const address = document.getElementById("address").value
+        const country = document.getElementById("country").value
+        const state = document.getElementById("state").value
+        const pincode = document.getElementById("pincode").value
 
         const data = {
-          firstName: firstName,
-          lastName: lastName,
+          firstname: firstName,
+          lastname: lastName,
           address: address,
           country: country,
           state: state,
@@ -305,13 +312,12 @@
         console.log("shipping data", data);
         const response = await fetch("http://localhost:5001/user/add-address", {
           method: "POST",
-          headers: {
-            "Content-Type": "application/json"
-          },
+          headers: headers,
           body: JSON.stringify(data)
         })
         const datas = await response.json()
         console.log("hey", datas);
+
       } catch (error) {
 
       }
@@ -344,14 +350,14 @@
 
     // Show-Data
     function setData(products) {
-            const productnContainer = document.getElementById("cartlisting");
-            // Clear existing content in the banner container
-            productnContainer.innerHTML = "";
-            products.forEach(element => {
-                console.log("element:", element);
-                const productCard = document.createElement("div");
-                productCard.className = "row mx-0 py-4 g-0 border-bottom";
-                productCard.innerHTML = `
+      const productnContainer = document.getElementById("cartlisting");
+      // Clear existing content in the banner container
+      productnContainer.innerHTML = "";
+      products.forEach(element => {
+        console.log("element:", element);
+        const productCard = document.createElement("div");
+        productCard.className = "row mx-0 py-4 g-0 border-bottom";
+        productCard.innerHTML = `
                 <div class="col-2 position-relative">
                   <span class="checkout-item-qty">3</span>
                   <picture class="d-block border">
@@ -370,9 +376,9 @@
                   <p class="fw-bolder text-end text-muted m-0">$85.00</p>
                 </div>`;
 
-                productnContainer.appendChild(productCard);
-          });
-        }
+        productnContainer.appendChild(productCard);
+      });
+    }
   </script>
 </body>
 

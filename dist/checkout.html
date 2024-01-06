@@ -78,49 +78,63 @@
             </nav>
             <div class="mt-5">
               <!-- Checkout Panel Information-->
-              <!-- <div class="d-flex justify-content-between align-items-center mb-4 border-bottom pb-4">
-                              <h3 class="fs-5 fw-bolder m-0 lh-1">Contact Information</h3>
-                              <small class="text-muted fw-bolder">Already registered? <a href="./login.html">Login</a></small>
-                            </div>
-                            <div class="row"> -->
-              <!-- First Name-->
-              <!-- <div class="col-sm-6">
-                                <div class="form-group">
-                                  <label for="firstNameBilling" class="form-label">First name</label>
-                                  <input type="text" class="form-control" id="firstNameBilling" placeholder="" value="" required="">
-                                </div>
-                              </div> -->
-
-              <!-- Last Name-->
-              <!-- <div class="col-sm-6">
-                                <div class="form-group">
-                                  <label for="lastNameBilling" class="form-label">Last name</label>
-                                  <input type="text" class="form-control" id="lastNameBilling" placeholder="" value="" required="">
-                                </div>
-                              </div> -->
-
-              <!-- Email-->
-              <!-- <div class="col-12">
-                                <div class="form-group">
-                                  <label for="email" class="form-label">Email</label>
-                                  <input type="email" class="form-control" id="email" placeholder="you@example.com">
-                                </div> -->
-
-              <!-- Mailing List Signup-->
-              <!-- <div class="form-group form-check m-0">
-                                  <input type="checkbox" class="form-check-input" id="add-mailinglist" checked>
-                                  <label class="form-check-label small text-muted" for="add-mailinglist">Keep me updated with your latest news and offers</label>
-                                </div>
-                              </div>
-                            </div> -->
 
               <h3 class="fs-5 mt-5 fw-bolder mb-4 border-bottom pb-4">Shipping Address</h3>
               <div class="row">
                 <form onsubmit="">
+                  <!-- Radio Buttons to Select Address -->
+                  <div class="col-12">
+                    <div class="form-group">
+                      <label class="form-label">Select Address</label>
+
+                      <!-- Box-style address selection -->
+                      <!---------------------------------------->
+                      <div class="card border mb-3">
+                        <div class="card-body d-flex justify-content-between">
+                          <div>
+                            <div class="form-check">
+                              <input type="radio" class="form-check-input" name="addressSelection" id="address1"
+                                checked>
+                              <label class="form-check-label" for="address1">
+                                Test Address 1
+                              </label>
+                            </div>
+                          </div>
+                          <div>
+                            <button type="button" class="btn btn-outline-primary me-2">Edit</button>
+                            <button type="button" class="btn btn-outline-danger">Delete</button>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="card border">
+                        <div class="card-body d-flex justify-content-between">
+                          <div>
+                            <div class="form-check">
+                              <input type="radio" class="form-check-input" name="addressSelection" id="address2">
+                              <label class="form-check-label" for="address2">
+                                Second Address (2)
+                              </label>
+                            </div>
+                          </div>
+                          <div>
+                            <button type="button" class="btn btn-outline-primary me-2">Edit</button>
+                            <button type="button" class="btn btn-outline-danger">Delete</button>
+                          </div>
+                        </div>
+                      </div>
+                      <!-- End of Box-style address selection -->
+                      <!---------------------------------------->
+
+                      <!-- You can dynamically generate these radio buttons based on user's addresses -->
+
+                    </div>
+                  </div>
+
                   <!-- First Name-->
                   <div class="col-sm-6">
                     <div class="form-group">
-                      <label  class="form-label">First name</label>
+                      <label class="form-label">First name</label>
                       <input type="text" class="form-control" id="firstName" placeholder="" required>
                     </div>
                   </div>
@@ -128,7 +142,7 @@
                   <!-- Last Name-->
                   <div class="col-sm-6">
                     <div class="form-group">
-                      <label  class="form-label">Last name</label>
+                      <label class="form-label">Last name</label>
                       <input type="text" class="form-control" id="lastName" placeholder="" required>
                     </div>
                   </div>
@@ -136,7 +150,7 @@
                   <!-- Address-->
                   <div class="col-12">
                     <div class="form-group">
-                      <label  class="form-label">Address</label>
+                      <label class="form-label">Address</label>
                       <input type="text" class="form-control" id="address" placeholder="Enter your valid address"
                         required>
                     </div>
@@ -145,7 +159,7 @@
                   <!-- Country-->
                   <div class="col-md-12">
                     <div class="form-group">
-                      <label  class="form-label">Country</label>
+                      <label class="form-label">Country</label>
                       <select class="form-select" id="country" required>
                         <option disabled selected>Please Select...</option>
                         <option value="india">India</option>
@@ -156,7 +170,7 @@
                   <!-- State-->
                   <div class="col-md-6">
                     <div class="form-group">
-                      <label  class="form-label">State</label>
+                      <label class="form-label">State</label>
                       <select class="form-select" id="state" required>
                         <option disabled selected>Please Select...</option>
                         <option value="ap">Andhra Pradesh</option>
@@ -171,11 +185,10 @@
                   <!-- Post Code-->
                   <div class="col-md-6">
                     <div class="form-group">
-                      <label  class="form-label">PinCode</label>
+                      <label class="form-label">PinCode</label>
                       <input type="text" class="form-control" id="pincode" placeholder="" required>
                     </div>
                   </div>
-
                 </form>
               </div>
 
@@ -189,8 +202,7 @@
 
               <div onclick="addshippingdata()"
                 class="pt-5 mt-5 pb-5 border-top d-flex justify-content-md-end align-items-center">
-                <a class="btn btn-dark w-100 w-md-auto" role="button">Proceed to
-                  shipping</a>
+                <a class="btn btn-dark w-100 w-md-auto" role="button">Proceed to shipping</a>
               </div>
             </div>
           </div>

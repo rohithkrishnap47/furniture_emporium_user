@@ -296,9 +296,9 @@
   <script src="./assets/js/theme.bundle.js"></script>
 
   <script>
-
-    const token = localStorage.getItem('token');
-    const headers = {
+    getAuth()
+    var token = localStorage.getItem('token');
+    var headers = {
       'Authorization': `Bearer ${token}`,
       'Content-Type': 'application/json'
     };
@@ -394,12 +394,18 @@
 
     // GET AUTH-ADDRESS
     let addresslist = [];
-    function showAddressList() {
+    function getAuth() {
+      let token = localStorage.getItem('token');
+      let headers = {
+        'Authorization': `Bearer ${token}`,
+        'Content-Type': 'application/json'
+      };
       if (!token) {
         console.error('User  not logged in');
         return;
       }
-      fetch('http://localhost:5001/user/getuserbyid', {
+      console.log("token:", token, headers);
+      fetch('http://localhost:5001/auth/getuserbyid', {
         method: 'GET',
         headers: headers,
       })
@@ -422,7 +428,7 @@
       addr.forEach(element => {
         const productCard = document.createElement("div");
         AddressCard.className = "card-body d-flex justify-content-between";
-        AddressCard.innerHTML = `                            <div class="form-check">
+        AddressCard.innerHTML = `<div class="form-check">
                               <input type="radio" class="form-check-input" name="addressSelection" id="address1"
                                 checked>
                               <label class="form-check-label" for="address1">

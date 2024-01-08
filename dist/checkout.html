@@ -391,6 +391,30 @@
         productnContainer.appendChild(productCard);
       });
     }
+
+    // GET AUTH-ADDRESS
+    let addresslist=[];
+    function showAddressList() {
+      if (!token) {
+        console.error('User  not logged in');
+        return;
+      }
+      fetch('http://localhost:5001/user/getuserbyid', {
+        method: 'GET',
+        headers: headers,
+      })
+        .then(response => response.json())
+        .then(data => {
+          const userAdd = data.data
+          addresslist = userAdd
+          setData(userAdd)
+        })
+        .catch(error => {
+          console.error('Error:', error);
+        });
+    }
+
+
   </script>
 </body>
 

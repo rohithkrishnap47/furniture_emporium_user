@@ -89,106 +89,92 @@
 
                       <!-- Box-style address selection -->
                       <!---------------------------------------->
-                      <div class="card border mb-3" id="addresslisting">
-                        <div class="">
+                      <div id="addresslisting">
+                        <!-- address list here -->
+                      </div>
+
+                      <!-- <div class="card border">
+                        <div class="card-body d-flex justify-content-between">
                           <div>
-                            <!-- <div class="form-check">
-                              <input type="radio" class="form-check-input" name="addressSelection" id="address1"
-                                checked>
-                              <label class="form-check-label" for="address1">
-                                Test Address 1
+                            <div class="form-check">
+                              <input type="radio" class="form-check-input" name="addressSelection" id="address2">
+                              <label class="form-check-label" for="address2">
+                                Second Address (2)
                               </label>
                             </div>
-                          </div> -->
-                            <div>
-                              <button type="button" class="btn btn-outline-primary me-2">Edit</button>
-                              <button type="button" class="btn btn-outline-danger">Delete</button>
-                            </div>
+                          </div>
+                          <div>
+                            <button type="button" class="btn btn-outline-primary me-2">Edit</button>
+                            <button type="button" class="btn btn-outline-danger">Delete</button>
                           </div>
                         </div>
+                      </div> -->
+                      <!-- End of Box-style address selection -->
+                      <!---------------------------------------->
 
-                        <div class="card border">
-                          <div class="card-body d-flex justify-content-between">
-                            <div>
-                              <div class="form-check">
-                                <input type="radio" class="form-check-input" name="addressSelection" id="address2">
-                                <label class="form-check-label" for="address2">
-                                  Second Address (2)
-                                </label>
-                              </div>
-                            </div>
-                            <div>
-                              <button type="button" class="btn btn-outline-primary me-2">Edit</button>
-                              <button type="button" class="btn btn-outline-danger">Delete</button>
-                            </div>
-                          </div>
-                        </div>
-                        <!-- End of Box-style address selection -->
-                        <!---------------------------------------->
+                      <!-- You can dynamically generate these radio buttons based on user's addresses -->
 
-                        <!-- You can dynamically generate these radio buttons based on user's addresses -->
-
-                      </div>
                     </div>
+                  </div>
 
-                    <!-- First Name-->
-                    <div class="col-sm-6">
-                      <div class="form-group">
-                        <label class="form-label">First name</label>
-                        <input type="text" class="form-control" id="firstName" placeholder="" required>
-                      </div>
+                  <!-- First Name-->
+                  <div class="col-sm-6">
+                    <div class="form-group">
+                      <label class="form-label">First name</label>
+                      <input type="text" class="form-control" id="firstName" placeholder="" required>
                     </div>
+                  </div>
 
-                    <!-- Last Name-->
-                    <div class="col-sm-6">
-                      <div class="form-group">
-                        <label class="form-label">Last name</label>
-                        <input type="text" class="form-control" id="lastName" placeholder="" required>
-                      </div>
+                  <!-- Last Name-->
+                  <div class="col-sm-6">
+                    <div class="form-group">
+                      <label class="form-label">Last name</label>
+                      <input type="text" class="form-control" id="lastName" placeholder="" required>
                     </div>
+                  </div>
 
-                    <!-- Address-->
-                    <div class="col-12">
-                      <div class="form-group">
-                        <label class="form-label">Address</label>
-                        <input type="text" class="form-control" id="address" placeholder="Enter your valid address"
-                          required>
-                      </div>
+                  <!-- Address-->
+                  <div class="col-12">
+                    <div class="form-group">
+                      <label class="form-label">Address</label>
+                      <input type="text" class="form-control" id="address" placeholder="Enter your valid address"
+                        required>
                     </div>
+                  </div>
 
-                    <!-- Country-->
-                    <div class="col-md-12">
-                      <div class="form-group">
-                        <label class="form-label">Country</label>
-                        <select class="form-select" id="country" required>
-                          <option disabled selected>Please Select...</option>
-                          <option value="india">India</option>
-                        </select>
-                      </div>
+                  <!-- Country-->
+                  <div class="col-md-12">
+                    <div class="form-group">
+                      <label class="form-label">Country</label>
+                      <select class="form-select" id="country" required>
+                        <option disabled selected>Please Select...</option>
+                        <option value="india">India</option>
+                      </select>
                     </div>
+                  </div>
 
-                    <!-- State-->
-                    <div class="col-md-6">
-                      <div class="form-group">
-                        <label class="form-label">State</label>
-                        <select class="form-select" id="state" required>
-                          <option disabled selected>Please Select...</option>
-                          <option value="ap">Andhra Pradesh</option>
-                          <option value="ka">Karnataka</option>
-                          <option value="kl">Kerala</option>
-                          <option value="tn">Tamil Nadu</option>
-                          <option value="tl">Telangana</option>
-                        </select>
-                      </div>
+                  <!-- State-->
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label class="form-label">State</label>
+                      <select class="form-select" id="state" required>
+                        <option disabled selected>Please Select...</option>
+                        <option value="ap">Andhra Pradesh</option>
+                        <option value="ka">Karnataka</option>
+                        <option value="kl">Kerala</option>
+                        <option value="tn">Tamil Nadu</option>
+                        <option value="tl">Telangana</option>
+                      </select>
                     </div>
+                  </div>
 
-                    <!-- Post Code-->
-                    <div class="col-md-6">
-                      <div class="form-group">
-                        <label class="form-label">PinCode</label>
-                        <input type="text" class="form-control" id="pincode" placeholder="" required>
-                      </div>
+                  <!-- Post Code-->
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label class="form-label">PinCode</label>
+                      <input type="text" class="form-control" id="pincode" placeholder="" required>
                     </div>
+                  </div>
                 </form>
               </div>
 
@@ -296,6 +282,8 @@
   <script src="./assets/js/theme.bundle.js"></script>
 
   <script>
+    let addressList = []
+
     getAuth()
     var token = localStorage.getItem('token');
     var headers = {
@@ -392,7 +380,7 @@
       });
     }
 
-    // GET AUTH-ADDRESS
+    // GET AUTH
     let addresslist = [];
     function getAuth() {
       let token = localStorage.getItem('token');
@@ -412,35 +400,77 @@
         .then(response => response.json())
         .then(data => {
           const userAdd = data.data
-          addresslist = userAdd
-          setData(userAdd)
+          getAddress(data.data.addressids)
         })
         .catch(error => {
           console.error('Error:', error);
         });
     }
 
-    function setData(addr) {
-      const productnContainer = document.getElementById("addresslisting");
+    // Get-address
+    function getAddress(ids) {
+      addressList = []
+      ids?.forEach(i => {
+        fetch('http://localhost:5001/user/get-address?addressId=' + i, {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+        })
+          .then(response => response.json())
+          .then(data => {
+            if (data.address) {
+              addressList.push(data?.address)
+              setAddressData()
+              console.log(addressList);
+            }
 
-      // Clear existing content in the banner container
-      addressContainer.innerHTML = "";
-      addr.forEach(element => {
-        const productCard = document.createElement("div");
-        AddressCard.className = "card-body d-flex justify-content-between";
-        AddressCard.innerHTML = `<div class="form-check">
-                              <input type="radio" class="form-check-input" name="addressSelection" id="address1"
-                                checked>
-                              <label class="form-check-label" for="address1">
-                                ${element.addressids}
-                              </label>
-                            </div>
-                          </div>`;
-
-        // Append the banner slide to the banner container
-        addressContainer.appendChild(AddressCard);
-      });
+          })
+          .catch(error => {
+            console.error('Error:', error);
+          });
+      })
     }
+
+    // SET-ADDRESS
+    function setAddressData() {
+      console.log(addressList);
+      const addressContainer = document.getElementById("addresslisting");
+
+      // Clear previous content in the container
+      addressContainer.innerHTML = "";
+
+      // Loop through each address in the array
+      addressList?.forEach(element => {
+        console.log(element);
+        // Create a new address card element
+        const addressCard = document.createElement("div");
+        addressCard.classList.add("card", "border", "mb-3");
+
+        // Set inner HTML for the address card
+        addressCard.innerHTML = `
+        <div class="card-body d-flex justify-content-between">
+      <div>
+        <div class="form-check">
+          <input type="radio" class="form-check-input" name="addressSelection" id="address1" checked>
+          <label class="form-check-label" for="address1">
+            ${element.firstname+" "+element.lastname}
+          </label>
+        </div>
+      </div>
+      <div>
+        <button type="button" class="btn btn-outline-primary me-2">Edit</button>
+        <button type="button" class="btn btn-outline-danger">Delete</button>
+      </div></div>
+    `;
+
+        // Append the address card to the container
+        addressContainer.appendChild(addressCard);
+
+      });
+      console.log("addressContainer", addressContainer);
+    }
+
   </script>
 </body>
 

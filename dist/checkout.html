@@ -291,12 +291,14 @@
   <script>
     let addressList = []
 
-    getAuth()
     var token = localStorage.getItem('token');
     var headers = {
       'Authorization': `Bearer ${token}`,
       'Content-Type': 'application/json'
     };
+
+    showCartItems()
+    getAuth()
     // Get-Data-From-user
     async function addshippingdata() {
       try {
@@ -330,9 +332,12 @@
       }
     }
     //  show-cart
+
     function showCartItems() {
-      if (!token) {
+      console.log("token", token);
+      if (!token.length) {
         console.error('Authorization token not found');
+
         return;
       }
 
@@ -380,7 +385,7 @@
                     </h6>
                     <span class="d-block text-muted fw-bolder text-uppercase fs-9">Size: 9 / Qty: 1</span>
                   </div>
-                  <p class="fw-bolder text-end text-muted m-0">$85.00</p>
+                  <p class="fw-bolder text-end text-muted m-0">₹${element.price}</p>
                 </div>`;
 
         productnContainer.appendChild(productCard);

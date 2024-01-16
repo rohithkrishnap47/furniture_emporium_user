@@ -247,24 +247,26 @@
               <!-- / Cart Item-->
             </div>
             <!-- PRICE -->
-            <div class="py-4 border-bottom">
-              <div class="d-flex justify-content-between align-items-center mb-2">
-                <p class="m-0 fw-bolder fs-6">Subtotal</p>
-                <p class="m-0 fs-6 fw-bolder">$422.99</p>
-              </div>
-              <div class="d-flex justify-content-between align-items-center ">
-                <p class="m-0 fw-bolder fs-6">Shipping</p>
-                <p class="m-0 fs-6 fw-bolder">$8.95</p>
-              </div>
-            </div>
-            <div class="py-4 border-bottom">
-              <div class="d-flex justify-content-between">
-                <div>
-                  <p class="m-0 fw-bold fs-5">Grand Total</p>
-                  <span class="text-muted small">Inc $45.89 sales tax</span>
+            <div id="totalAmount">
+              <!-- <div class="py-4 border-bottom">
+                <div class="d-flex justify-content-between align-items-center mb-2">
+                  <p class="m-0 fw-bolder fs-6">Subtotal</p>
+                  <p class="m-0 fs-6 fw-bolder">$422.99</p>
                 </div>
-                <p class="m-0 fs-5 fw-bold">$422.99</p>
+                <div class="d-flex justify-content-between align-items-center ">
+                  <p class="m-0 fw-bolder fs-6">Shipping</p>
+                  <p class="m-0 fs-6 fw-bolder">$8.95</p>
+                </div>
               </div>
+              <div class="py-4 border-bottom">
+                <div class="d-flex justify-content-between">
+                  <div>
+                    <p class="m-0 fw-bold fs-5">Grand Total</p>
+                    <span class="text-muted small">Inc $45.89 sales tax</span>
+                  </div>
+                  <p class="m-0 fs-5 fw-bold">$422.99</p>
+                </div>
+              </div> -->
             </div>
             <div class="py-4">
               <!-- <div class="input-group mb-0">
@@ -383,7 +385,7 @@
                       ${element.name}
                       <i class="ri-close-line ms-3"></i>
                     </h6>
-                    <span class="d-block text-muted fw-bolder text-uppercase fs-9">Size: 9 / Qty: 1</span>
+                    <span class="d-block text-muted fw-bolder text-uppercase fs-9"></span>
                   </div>
                   <p class="fw-bolder text-end text-muted m-0">₹${element.price}</p>
                 </div>`;
@@ -481,6 +483,42 @@
 
       });
       console.log("addressContainer", addressContainer);
+    }
+
+    // total amount - in cart
+    function setTotal(cartInfo) {
+      console.log("cartInfo", cartInfo)
+      const priceContainer = document.getElementById("totalAmount");
+      let totalPrice=cartInfo.price*cartInfo.quantity
+      console.log("totalPrice",totalPrice);
+      console.log("cartInfo.price",cartInfo.price);
+      // console.log("totalPrice",totalPrice);
+      const priceTot = document.createElement("div");
+      priceTot.innerHTML = `              <div class="py-4 border-bottom">
+                <div class="d-flex justify-content-between align-items-center mb-2">
+                  <p class="m-0 fw-bolder fs-6">Total</p>
+                  <p class="m-0 fs-6 fw-bolder">₹${cartInfo.totalPrice}</p>
+                </div>
+                <div class="d-flex justify-content-between align-items-center mb-2">
+                  <p class="m-0 fw-bolder fs-6">Discount Amount</p>
+                  <p class="m-0 fs-6 fw-bolder"> - ₹${cartInfo.totalDiscountprice}</p>
+                </div>
+                <div class="d-flex justify-content-between align-items-center ">
+                  <p class="m-0 fw-bolder fs-6">Shipping</p>
+                  <p class="m-0 fs-6 fw-bolder">₹40</p>
+                </div>
+              </div>
+              <div class="py-4 border-bottom">
+                <div class="d-flex justify-content-between">
+                  <div>
+                    <p class="m-0 fw-bold fs-5">Grand Total</p>
+                    <span class="text-muted small"></span>
+                  </div>
+                  <p class="m-0 fs-5 fw-bold">₹${cartInfo.totalPrice+40-cartInfo.totalDiscountprice}</p>
+                </div>
+              </div>`;
+
+      priceContainer.appendChild(priceTot);
     }
 
   </script>

@@ -195,6 +195,10 @@
 
               <div onclick="addshippingdata()"
                 class="pt-5 mt-5 pb-5 border-top d-flex justify-content-md-end align-items-center">
+                <a class="btn btn-dark w-100 w-md-auto" role="button">ADD ADDRESS</a>
+              </div>
+              <div onclick="placeOrder()"
+                class="pt-5 mt-5 pb-5 border-top d-flex justify-content-md-end align-items-center">
                 <a class="btn btn-dark w-100 w-md-auto" role="button">Proceed to shipping</a>
               </div>
             </div>
@@ -292,7 +296,7 @@
 
   <script>
     let addressList = []
-    
+
 
     var token = localStorage.getItem('token');
     var headers = {
@@ -300,8 +304,44 @@
       'Content-Type': 'application/json'
     };
 
+    // ----------------------------------------------------------------------------------------
+    // ADD-ORDER
+    async function placeOrder() {
+      try {
+        // event.preventDefault()
+        const firstName = document.getElementById("firstName").value
+        const lastName = document.getElementById("lastName").value
+        const address = document.getElementById("address").value
+        const country = document.getElementById("country").value
+        const state = document.getElementById("state").value
+        const pincode = document.getElementById("pincode").value
+
+        const data = {
+          firstname: firstName,
+          lastname: lastName,
+          address: address,
+          country: country,
+          state: state,
+          pincode: pincode,
+        }
+        console.log("shipping data", data);
+        const response = await fetch("http://localhost:5001/user/place-order", {
+          method: "POST",
+          headers: headers,
+          body: JSON.stringify(data)
+        })
+        const datas = await response.json()
+        console.log("hey", datas);
+
+      } catch (error) {
+
+      }
+    }
+
+    // ----------------------------------------------------------------------------------------
     showCartItems()
     getAuth()
+    
     // Get-Data-From-user
     async function addshippingdata() {
       try {
@@ -334,6 +374,9 @@
 
       }
     }
+
+
+    // ----------------------------------------------------------------------------------------
     //  show-cart
 
     function showCartItems() {
@@ -395,6 +438,7 @@
       });
     }
 
+    // ----------------------------------------------------------------------------------------
     // GET AUTH
     let addresslist = [];
     function getAuth() {
@@ -447,6 +491,7 @@
       })
     }
 
+    // ----------------------------------------------------------------------------------------
     // SET-ADDRESS
     function setAddressData() {
       console.log(addressList);
@@ -490,9 +535,9 @@
     function setTotal(cartInfo) {
       console.log("cartInfo", cartInfo)
       const priceContainer = document.getElementById("totalAmount");
-      let totalPrice=cartInfo.price*cartInfo.quantity
-      console.log("totalPrice",totalPrice);
-      console.log("cartInfo.price",cartInfo.price);
+      let totalPrice = cartInfo.price * cartInfo.quantity
+      console.log("totalPrice", totalPrice);
+      console.log("cartInfo.price", cartInfo.price);
       // console.log("totalPrice",totalPrice);
       const priceTot = document.createElement("div");
       priceTot.innerHTML = `              <div class="py-4 border-bottom">
@@ -515,13 +560,14 @@
                     <p class="m-0 fw-bold fs-5">Grand Total</p>
                     <span class="text-muted small"></span>
                   </div>
-                  <p class="m-0 fs-5 fw-bold">₹${cartInfo.totalPrice+40-cartInfo.totalDiscountprice}</p>
+                  <p class="m-0 fs-5 fw-bold">₹${cartInfo.totalPrice + 40 - cartInfo.totalDiscountprice}</p>
                 </div>
               </div>`;
 
       priceContainer.appendChild(priceTot);
     }
 
+    // ----------------------------------------------------------------------------------------
   </script>
 </body>
 

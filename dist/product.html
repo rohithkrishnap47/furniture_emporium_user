@@ -668,7 +668,7 @@
                                     </picture>
                                 </div>
                             </div> -->
-                            <button onclick="addToCart()"
+                            <button onclick="addToCart()" id="buynow"
                                 class="btn btn-dark w-100 mt-4 mb-0 hover-lift-sm hover-boxshadow">Buy Now</button>
 
                             <!-- Product Highlights-->
@@ -1473,6 +1473,13 @@
     <script src="./assets/js/theme.bundle.js"></script>
     <script>
         const token = localStorage.getItem("token");
+        const headers = {
+            'Authorization': `Bearer ${token}`,
+            'Content-Type': 'application/json'
+        };
+        let isProductFoundinCart;
+        const button=document.getElementById("buynow")
+        // ---------------------------------
         showProducts()
         function showProducts() {
             // ==========================================================
@@ -1480,13 +1487,13 @@
             const id = params.get("id");
             console.log("dddddd", id);
             fetch(`http://localhost:5001/product/products/${id}`)
-                // fetch(`http://localhost:5001/product/products/65437192b2ff3c5d7a11b1dc`)
                 .then(response => response.json())
                 .then(data => {
                     const product = data.data
                     console.log(data);
                     console.log("products", product);
                     setData(product)
+                    getCartproducts(product)
                 })
                 .catch(error => {
                     console.error('Error:', error);
@@ -1511,24 +1518,13 @@
             productnContainer.appendChild(productCard);
 
         }
-        // image zoom
-        // $(document).ready(function () {
-        //     $('#imagezoom img[data-zoomable]').zoom();
-        // });
 
-        //ADD-TO-CART 
-        // async function addToCart() {
-        //     try {
-        //         const params = new URLSearchParams(window.location.search);
-        //         const id = params.get("id");
-        //         fetch(`http://localhost:5001/product/products/${id}`)
-        //     } catch (error) {
-        //         console.error("errrr", error.message);
-        //     }
-        //     window.location.href = ("http://127.0.0.1:5508/dist/cart.html")
-        // }
         async function addToCart() {
             try {
+                if (isProductFoundinCart) {
+                    window.location.href = `http://127.0.0.1:5508/dist/cart.html`
+                    return
+                }
                 const params = new URLSearchParams(window.location.search);
                 const id = params.get("id");
 
@@ -1536,9 +1532,9 @@
                 const productResponse = await fetch(`http://localhost:5001/product/products/${id}`);
                 const productData = await productResponse.json();
 
-                
+
                 const quantity = 1;
-                
+
 
                 // Add the product to the cart
                 const addToCartResponse = await fetch("http://localhost:5001/cart/addtocart", {
@@ -1558,7 +1554,7 @@
                     // Redirect to the cart page after successful addition
                     const addedCartItem = await addToCartResponse.json();
                     const addedCartItemId = addedCartItem.id;
-                    console.log("response",addedCartItem);
+                    console.log("response", addedCartItem);
                     window.location.href = `http://127.0.0.1:5508/dist/cart.html`;
                 } else {
                     console.error("Failed to add to cart:", addToCartResponse.statusText);
@@ -1585,7 +1581,30 @@
             }
         }
 
-        // ADD-TO-CART
+        // CHECK-Product-existence-in-CART
+        function getCartproducts(product) {
+            if (!token) {
+                console.error('Authorization token not found');
+                return;
+            }
+            fetch('http://localhost:5001/cart/showcart', {
+                method: 'GET',
+                headers: headers,
+            })
+                .then(response => response.json())
+                .then(data => {
+                    const cartInfo = data;
+                    const cart = data.cartProducts;
+                    const result = cart.find(element => element._id == product._id);
+                    console.log("result", result);
+                    isProductFoundinCart=result?true:false
+                    button.textContent=result?"Go To Cart":"Buy Now"
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                });
+        }
+
 
 
     </script>

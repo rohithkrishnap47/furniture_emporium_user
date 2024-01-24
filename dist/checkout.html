@@ -30,6 +30,9 @@
 
   <!-- Main CSS -->
   <link rel="stylesheet" href="./assets/css/theme.bundle.css" />
+  <!-- SWEET ALERT -->
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+
 
   <!-- bootstrap -->
   <!--  -->
@@ -131,9 +134,10 @@
 
                   <div class="card shadow mb-4">
                     <div class="card-header py-3 text-center" onclick="addshippingdata()">
-                      <button type="button" class="btn btn-outline-primary mx-auto" onclick="$('#myModal').modal('show')">ADD ADDRESS</button>
-                  </div>
-                  
+                      <button type="button" class="btn btn-outline-primary mx-auto"
+                        onclick="$('#myModal').modal('show')">ADD ADDRESS</button>
+                    </div>
+
 
                     <!-- ADD Category MODAL------------------------------------------- -->
                     <div class="modal fade" id="myModal">
@@ -142,7 +146,8 @@
                           <!-- Modal Header -->
                           <div class="modal-header">
                             <h4 class="modal-title">Coupon</h4>
-                            <button type="button" class="close" data-dismiss="modal"onclick="$('#myModal').modal('hide')">&times;</button>
+                            <button type="button" class="close" data-dismiss="modal"
+                              onclick="$('#myModal').modal('hide')">&times;</button>
                           </div>
 
                           <div class="modal-body">
@@ -211,9 +216,10 @@
 
                           <!-- Modal footer -->
                           <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal" onclick="$('#myModal').modal('hide')">Close</button>
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal"
+                              onclick="$('#myModal').modal('hide')">Close</button>
                             <button id="bannerIdDisplay" type="button" class="btn btn-primary"
-                            onclick="addshippingdata()">OK</button>
+                              onclick="addshippingdata()">OK</button>
                           </div>
                         </div>
                       </div>
@@ -347,42 +353,49 @@
     // ----------------------------------------------------------------------------------------
     // ADD-ORDER
     async function placeOrder() {
-    try {
-      // event.preventDefault()
+      try {
+        // event.preventDefault()
         var userName = localStorage.getItem('userInfo.firstname');
         console.log("userName", userName);
-
+        if (!selected_address) {
+          Swal.fire({
+            title: "Select Address",
+            text: "",
+            icon: "warning"
+          });
+          return;
+        }
         const data = {
-            product: cartInfo.cartProducts.map(item => item._id),
-            deliveryAddress: selected_address,
-            cartDetails: selected_address,
-            couponUsed: ""
+          product: cartInfo.cartProducts.map(item => item._id),
+          deliveryAddress: selected_address,
+          cartDetails: selected_address,
+          couponUsed: ""
         }
 
         console.log("shipping data", data);
 
         const response = await fetch("http://localhost:5001/user/place-order", {
-            method: "POST",
-            headers: headers,
-            body: JSON.stringify(data)
+          method: "POST",
+          headers: headers,
+          body: JSON.stringify(data)
         });
 
         if (response.status === 201) {
-            const responseData = await response.json();
-            console.log("placeorder", responseData);
-            console.log("Order placed successfully!");
+          const responseData = await response.json();
+          console.log("placeorder", responseData);
+          console.log("Order placed successfully!");
 
-            
-            window.location.href = "http://127.0.0.1:5508/dist/checkout-payment.html";
+
+          window.location.href = "http://127.0.0.1:5508/dist/checkout-payment.html";
         } else {
-            console.error("Failed to place order. Status code:", response.status);
-            // Handle other status codes or errors here
+          console.error("Failed to place order. Status code:", response.status);
+          // Handle other status codes or errors here
         }
-    } catch (error) {
+      } catch (error) {
         console.error("An error occurred:", error);
         // Handle errors here
+      }
     }
-}
 
 
     // ----------------------------------------------------------------------------------------
@@ -463,7 +476,7 @@
         productCard.className = "row mx-0 py-4 g-0 border-bottom";
         productCard.innerHTML = `
                 <div class="col-2 position-relative">
-                  <span class="checkout-item-qty">*</span>
+                  <span class="checkout-item-qty">${element.quantity}</span>
                   <picture class="d-block border">
                     <img class="img-fluid" src="${element.images[0]}"
                       alt="F-Empo">
@@ -559,11 +572,12 @@
         <div class="card-body d-flex justify-content-between">
             <div>
                 <div class="form-check">
-                    <input type="radio" class="form-check-input" name="addressSelection" id="address${element.id}" checked>
+                    <input type="radio" class="form-check-input" name="addressSelection" id="address${element.id}" >
                     <label class="form-check-label" for="address${element.id}">
                         ${element.firstname + " " + element.lastname}
                     </label>
                 </div>
+                
             </div>
             <div>
                 <button type="button" class="btn btn-outline-primary me-2">Edit</button>
@@ -582,6 +596,9 @@
             // Handle the selected radio data
             selected_address = element
             console.log('Selected address:', element);
+          }
+          else {
+
           }
         });
       });

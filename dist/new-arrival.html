@@ -91,8 +91,12 @@
                                 <div class="input-group mb-3 h-100">
                                     <span class="input-group-text px-4 bg-transparent border-0"><i
                                             class="ri-search-line ri-lg"></i></span>
-                                    <input type="text" class="form-control text-body bg-transparent border-0"
-                                        placeholder="Enter your search terms...">
+                                    <form class=" form-control text-body bg-transparent border-0"
+                                        onsubmit="searchProducts()" action="">
+                                        <input id="productSearch" type="text"
+                                            class="form-control text-body bg-transparent border-0"
+                                            placeholder="Let us know , what you are looking for ...">
+                                    </form>
                                     <span
                                         class="input-group-text px-4 cursor-pointer disable-child-pointer close-search bg-transparent border-0"><i
                                             class="ri-close-circle-line ri-lg"></i></span>
@@ -1071,6 +1075,33 @@
         </div>
     </div>
     <!-- Theme JS -->
+    <!-- product search -->
+    <script>
+        const params = new URLSearchParams(window.location.search);
+        const qsearch = params.get("search");
+
+        // Set the initial value of the search input
+        const searchInput = document.getElementById("productSearch");
+        searchInput.value = qsearch || '';
+
+        // Call searchProducts function initially
+        searchProducts();
+        async function searchProducts() {
+            event.preventDefault();
+            const search = searchInput.value;
+
+            try {
+                const response = await fetch(`http://localhost:5001/product/productsAll?name=${search}`);
+                const data = await response.json();
+
+                setData(data.data)
+                console.log("Data:", data);
+            } catch (error) {
+                console.log("Error:", error);
+            }
+        }
+    </script>
+
     <!-- Vendor JS -->
     <script src="./assets/js/vendor.bundle.js"></script>
 

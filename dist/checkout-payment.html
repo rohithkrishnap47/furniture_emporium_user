@@ -140,7 +140,7 @@
                             </div>
                             
                             <!-- Payment Details-->
-                            <div class="card-details">
+                            <!-- <div class="card-details">
                               <div class="row pt-3">
                                 <div class="col-md-12">
                                   <div class="form-group">
@@ -178,12 +178,12 @@
                                   </div>
                                 </div>
                               </div>
-                            </div>
+                            </div> -->
                             <!-- / Payment Details-->
                             
                             <!-- Paypal Info-->
                             <div class="paypal-details bg-light p-4 d-none my-3 fw-bolder">
-                              Please click on complete order. You will then be transferred to Paypal to enter your payment details.
+                              Please click on complete order. You will then be transferred to Razorpay to enter your payment details.
                             </div>
                             <!-- /Paypal Info-->
                             
@@ -264,10 +264,17 @@
                             </div>
                         </div>
                         <div class="py-4">
-                            <div class="input-group mb-0">
-                                <input type="text" class="form-control" placeholder="Enter your coupon code">
-                                <button class="btn btn-dark btn-sm px-4">Apply</button>
-                            </div>
+                          <div class="input-group mb-0">
+                            <select class="form-control">
+                                <option value="" disabled selected>Select your coupon code</option>
+                                <option value="code1">Code 1</option>
+                                <option value="code2">Code 2</option>
+                                <option value="code3">Code 3</option>
+                                <!-- Add more options as needed -->
+                            </select>
+                            <button class="btn btn-dark btn-sm px-4">Apply</button>
+                        </div>
+                        
                         </div>
                     </div>
                 </div>

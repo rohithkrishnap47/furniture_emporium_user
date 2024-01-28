@@ -1478,7 +1478,7 @@
             'Content-Type': 'application/json'
         };
         let isProductFoundinCart;
-        const button=document.getElementById("buynow")
+        const button = document.getElementById("buynow")
         // ---------------------------------
         showProducts()
         function showProducts() {
@@ -1525,6 +1525,7 @@
                     window.location.href = `http://127.0.0.1:5508/dist/cart.html`
                     return
                 }
+
                 const params = new URLSearchParams(window.location.search);
                 const id = params.get("id");
 
@@ -1535,7 +1536,9 @@
 
                 const quantity = 1;
 
-
+                if (productData.stock === 0) {
+                    return
+                }
                 // Add the product to the cart
                 const addToCartResponse = await fetch("http://localhost:5001/cart/addtocart", {
                     method: "POST",
@@ -1597,8 +1600,11 @@
                     const cart = data.cartProducts;
                     const result = cart.find(element => element._id == product._id);
                     console.log("result", result);
-                    isProductFoundinCart=result?true:false
-                    button.textContent=result?"Go To Cart":"Buy Now"
+                    isProductFoundinCart = result ? true : false;
+                    button.textContent = result ? "Go To Cart" : "Buy Now";
+                    button.textContent = product.stock === 0 ? "OUT OF STOCK !" : button.textContent;
+                    button.style.cursor = product.stock === 0 ? "not-allowed" : "pointer";
+
                 })
                 .catch(error => {
                     console.error('Error:', error);

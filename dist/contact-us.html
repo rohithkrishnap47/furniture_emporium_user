@@ -121,7 +121,7 @@
                                         class="flex h-10 w-full rounded-md border border-gray-300 bg-transparent px-3 py-2 text-sm placeholder:text-gray-400 focus:outline-none focus:ring-1 focus:ring-gray-400 focus:ring-offset-1 disabled:cursor-not-allowed disabled:opacity-50 dark:border-gray-700 dark:text-gray-50 dark:focus:ring-gray-400 dark:focus:ring-offset-gray-900"
                                         id="message" placeholder="Leave us a message" cols="3"></textarea>
                                 </div>
-                                <button type="button"
+                                <button id="submitresponse" type="button"
                                     class="w-full rounded-md bg-black px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-black/80 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black">
                                     Send Message
                                 </button>
@@ -150,7 +150,8 @@
                                 </p>
                                 <p class="w-full text-base  text-gray-600">Mon-Sat 9am to 5pm.</p>
                                 <p class="text-sm font-semibold text-gray-600">
-                                    3rd floor, HiLITE Business Park Thondayad, Bypass, Poovangal, Kozhikode, Kerala 673014
+                                    3rd floor, HiLITE Business Park Thondayad, Bypass, Poovangal, Kozhikode, Kerala
+                                    673014
                                 </p>
                             </div>
                         </div>
@@ -246,22 +247,61 @@
     <!-- //CONTACT US -->
 
     <script>
-        // Get the button and modal elements
         const editButton = document.getElementById('editButton');
         const detailsModal = document.getElementById('detailsModal');
         const closeModalButton = document.getElementById('closeModalButton');
 
-        // Add event listener to the edit button
         editButton.addEventListener('click', function () {
-            // Show the modal
             detailsModal.classList.remove('hidden');
         });
 
-        // Add event listener to the close button
         closeModalButton.addEventListener('click', function () {
-            // Hide the modal
             detailsModal.classList.add('hidden');
         });
+
+
+
+        // fetching  form data
+        document.addEventListener('DOMContentLoaded', function () {
+            const form = document.querySelector('form');
+
+            form.addEventListener('submit', function (e) {
+                e.preventDefault();
+
+                const firstName = document.getElementById('first_name').value;
+                const lastName = document.getElementById('last_name').value;
+                const email = document.getElementById('email').value;
+                const phoneNumber = document.getElementById('phone_number').value;
+                const message = document.getElementById('message').value;
+
+                const formData = new FormData();
+                formData.append('entry.1234567890', firstName); // Replace '1234567890' with the actual entry ID for First Name
+                formData.append('entry.0987654321', lastName); // Replace '0987654321' with the actual entry ID for Last Name
+                formData.append('entry.2468013579', email); // Replace '2468013579' with the actual entry ID for Email
+                formData.append('entry.1357924680', phoneNumber); // Replace '1357924680' with the actual entry ID for Phone Number
+                formData.append('entry.5678901234', message); // Replace '5678901234' with the actual entry ID for Message
+
+                fetch('https://forms.gle/yt7WtsXtxPFLFKNA6', {
+                    method: 'POST',
+                    body: formData,
+                    mode: 'no-cors'
+                })
+                    .then(response => {
+                        if (response.ok) {
+                            // Handle success (e.g., show a success message)
+                            console.log('Form submitted successfully');
+                        } else {
+                            // Handle errors (e.g., show an error message)
+                            console.error('Form submission failed');
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Error:', error);
+                    });
+            });
+        });
+
+
     </script>
 </body>
 

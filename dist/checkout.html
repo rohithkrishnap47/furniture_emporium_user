@@ -428,9 +428,12 @@
         })
         const datas = await response.json()
         console.log("hey", datas);
+        if(response.ok){
+          location.reload()
+        }
 
       } catch (error) {
-
+        console.error(error);
       }
     }
 

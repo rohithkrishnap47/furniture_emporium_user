@@ -111,10 +111,8 @@
     checkUserExsist()
 
     function checkUserExsist() {
-      // Check if token exists in localStorage
       const token = localStorage.getItem('token');
       if (token) {
-        // Redirect to the login page if token is not present
         history.back()
         // window.location.href = '/dist/index.html';
       }

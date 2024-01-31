@@ -45,7 +45,7 @@
     </noscript>
 
     <!-- Page Title -->
-    <title>Furniture Emporium | Bootstrap 5 HTML Template</title>
+    <title>Furniture Emporium | Category</title>
 
 </head>
 
@@ -105,10 +105,21 @@
                         <!-- /Navbar Search-->
 
                         <!-- Navbar Login-->
-                        <li class="ms-1 d-none d-lg-inline-block">
-                            <a class="nav-link text-body" href="./login.html">
+                        <li class="nav-item dropdown ms-1 d-none d-lg-inline-block">
+                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                                aria-expanded="false">
                                 Account
                             </a>
+                            <ul class="dropdown-menu" id="accountDiv" style="cursor: pointer;">
+                                <!-- <span id="username" style="font-weight: bold;"></span> -->
+                                <li><a class="dropdown-item" id="username" href="./userdetail.html" style="font-weight: bold;">Profile</a></li>
+                                <li><a class="dropdown-item" id="login" href="./login.html">Login / Signup</a></li>
+                                <li><a class="dropdown-item" href="./cart.html">Cart</a></li>
+                                <li><a class="dropdown-item" href="./checkout.html">Checkout</a></li>
+                                <li><a class="dropdown-item" id="logout" onclick="logout()">Logout</a></li>
+
+
+                            </ul>
                         </li>
                         <!-- /Navbar Login-->
 
@@ -1093,6 +1104,37 @@
 
     <!-- Theme JS -->
     <script src="./assets/js/theme.bundle.js"></script>
+
+    <script>
+                // authentication code
+                const userspan = document.getElementById("username");
+        const logoutlist = document.getElementById("logout");
+        const loginList = document.getElementById("login");
+
+        checkAuthenticated()
+        function checkAuthenticated() {
+            // Check if token exists in localStorage
+            const token = localStorage.getItem('token');
+            if (token) {
+                // json stingify to parse
+                const userInfo = JSON.parse(localStorage.getItem("userInfo"));
+                userspan.textContent = `Hello , ${userInfo?.firstname} 👋`;
+                logoutlist.style.display = "block"
+                loginList.style.display = "none"
+                console.log("userinfo=>", userInfo);
+            }
+            else {
+                logoutlist.style.display = "none"
+                loginList.style.display = "block"
+            }
+
+
+        }
+        function logout() {
+            localStorage.clear();
+            window.location.reload()
+        }
+    </script>
 </body>
 
 </html>

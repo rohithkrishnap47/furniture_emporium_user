@@ -12,7 +12,13 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.5.1/chart.min.js"></script>
-    <title>Furnitue Emporium</title>
+    <!-- Include SweetAlert2 CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@10">
+
+    <!-- Include SweetAlert2 JavaScript -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+
+    <title>Furnitue Emporium | User </title>
 </head>
 
 <body>
@@ -74,25 +80,13 @@
                                 <h2 class="text-lg font-semibold text-gray-900 mb-4">Personal Details</h2>
                                 <ul class="text-gray-700">
                                     <li class="flex  py-2">
-                                        <span class="font-bold w-24">Full name:</span>
+                                        <span class="font-bold w-24">First name:</span>
                                         <input type="text" id="fullName"
                                             class="text-gray-700 border border-gray-300 px-3 py-1 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500">
 
                                     </li>
                                     <li class="flex   py-2">
-                                        <span class="font-bold w-24">Birthday:</span>
-                                        <input type="text" id="fullName"
-                                            class="text-gray-700 border border-gray-300 px-3 py-1 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500">
-
-                                    </li>
-                                    <li class="flex   py-2">
-                                        <span class="font-bold w-24">Joined:</span>
-                                        <input type="text" id="fullName"
-                                            class="text-gray-700 border border-gray-300 px-3 py-1 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500">
-
-                                    </li>
-                                    <li class="flex   py-2">
-                                        <span class="font-bold w-24">Mobile:</span>
+                                        <span class="font-bold w-24">Last name:</span>
                                         <input type="text" id="fullName"
                                             class="text-gray-700 border border-gray-300 px-3 py-1 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500">
 
@@ -104,17 +98,12 @@
 
                                     </li>
                                     <li class="flex   py-2">
-                                        <span class="font-bold w-24">Location:</span>
+                                        <span class="font-bold w-24">Mobile:</span>
                                         <input type="text" id="fullName"
                                             class="text-gray-700 border border-gray-300 px-3 py-1 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500">
 
                                     </li>
-                                    <li class="flex   py-2">
-                                        <span class="font-bold w-24">Languages:</span>
-                                        <input type="text" id="fullName"
-                                            class="text-gray-700 border border-gray-300 px-3 py-1 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500">
 
-                                    </li>
                                 </ul>
                                 <div class="flex justify-between mx-8">
                                     <button id="closeModalButton"
@@ -150,32 +139,25 @@
 
                     <ul class="mt-2 text-gray-700">
                         <li class="flex border-y py-2">
-                            <span class="font-bold w-24">Full name:</span>
+                            <span class="font-bold w-24">First Name:</span>
                             <span class="text-gray-700">Amanda S. Ross</span>
                         </li>
                         <li class="flex border-b py-2">
-                            <span class="font-bold w-24">Birthday:</span>
+                            <span class="font-bold w-24">Last Name:</span>
                             <span class="text-gray-700">24 Jul, 1991</span>
-                        </li>
-                        <li class="flex border-b py-2">
-                            <span class="font-bold w-24">Joined:</span>
-                            <span class="text-gray-700">10 Jan 2022 (25 days ago)</span>
-                        </li>
-                        <li class="flex border-b py-2">
-                            <span class="font-bold w-24">Mobile:</span>
-                            <span class="text-gray-700">(123) 123-1234</span>
                         </li>
                         <li class="flex border-b py-2">
                             <span class="font-bold w-24">Email:</span>
                             <span class="text-gray-700">amandaross@example.com</span>
                         </li>
                         <li class="flex border-b py-2">
-                            <span class="font-bold w-24">Location:</span>
-                            <span class="text-gray-700">New York, US</span>
+                            <span class="font-bold w-24">Mobile:</span>
+                            <span class="text-gray-700">(123) 123-1234</span>
                         </li>
+
                         <li class="flex border-b py-2">
-                            <span class="font-bold w-24">Languages:</span>
-                            <span class="text-gray-700">English, Spanish</span>
+                            <span class="font-bold w-24">Joined:</span>
+                            <span class="text-gray-700">10 Jan 2022 (25 days ago)</span>
                         </li>
                     </ul>
                 </div>
@@ -191,21 +173,21 @@
                             <thead class="text-xs text-gray-700 uppercase bg-gray-50">
                                 <tr>
                                     <th scope="col" class="px-6 py-3">
-                                        Product name
+                                        Product
                                     </th>
                                     <th scope="col" class="px-6 py-3">
                                         <div class="flex items-center">
-                                            Color
+                                            Ordered Date
                                         </div>
                                     </th>
                                     <th scope="col" class="px-6 py-3">
                                         <div class="flex items-center">
-                                            Category
+                                            Delivery Date
                                         </div>
                                     </th>
                                     <th scope="col" class="px-6 py-3">
                                         <div class="flex items-center">
-                                            Price
+                                            Delivery Status
                                         </div>
                                     </th>
                                     <th scope="col" class="px-6 py-3">
@@ -215,10 +197,10 @@
                                     </th>
                                 </tr>
                             </thead>
-                            <tr class="bg-white border-b">
-                                <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">
+                            <tr class="bg-white border-b" id="orderdetails">
+                                <td scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">
                                     Apple MacBook Pro 17"
-                                </th>
+                                </td>
                                 <td class="px-6 py-4">
                                     Silver
                                 </td>
@@ -228,21 +210,12 @@
                                 <td class="px-6 py-4">
                                     $2999
                                 </td>
-                                <td class="px-6 py-4 text-left">
-                                    <!-- CANCEL-BUTTON-OPTION -->
-                                    <div class="relative" x-data="{ isOpen: false }">
-                                        <button @click="isOpen = !isOpen"
-                                            class="text-blue-600 hover:underline focus:outline-none">
-                                            Edit
-                                        </button>
-                                        <div x-show="isOpen" @click.away="isOpen = false" class="absolute z-10 mt-2">
-                                            <button @click="isOpen = false"
-                                                class="block px-4 py-2 text-sm text-red-600 hover:bg-red-100 w-full text-left rounded-md shadow-md bg-white max-h-32 overflow-y-auto">
-                                                Cancel
-                                            </button>
-                                        </div>
-                                    </div>
-                                    <!--  -->
+                                <td class="px-6 py-4 ">
+                                    <button id="cancelButton" onclick="confirmCancel()"
+                                        class="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
+                                        Cancel
+                                    </button>
+
                                 </td>
                             </tr>
                             </tbody>
@@ -342,6 +315,34 @@
         </section>
     </div>
     <script>
+        // ----------------------------------------------------------------
+        // CANCEL-ORDER
+        function confirmCancel() {
+            Swal.fire({
+                title: 'Do you want to cancel your order?',
+                icon: 'question',
+                showCancelButton: true,
+                confirmButtonText: 'Yes, cancel it!',
+                cancelButtonText: 'No, keep it'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    console.log('Order cancelled!');
+                    // Perform further actions here if user confirms
+                    disableCancelButton();
+                } else {
+                    console.log('Cancellation declined.');
+                    // Handle cancellation decline
+                }
+            });
+        }
+        // DISABLE-BUTTON
+        function disableCancelButton() {
+            var cancelButton = document.getElementById('cancelButton');
+            cancelButton.disabled = true;
+            // You can also change the style of the button to indicate it's disabled if needed
+            cancelButton.classList.add('opacity-50', 'cursor-not-allowed');
+        }
+        // ----------------------------------------------------------------
         // Get the button and modal elements
         const editButton = document.getElementById('editButton');
         const detailsModal = document.getElementById('detailsModal');

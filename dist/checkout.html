@@ -34,6 +34,8 @@
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 
 
+  <!-- RAZORPAY -->
+  <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
   <!-- bootstrap -->
   <!--  -->
   <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
@@ -195,7 +197,7 @@
                         <div class="modal-content">
                           <!-- Modal Header -->
                           <div class="modal-header">
-                            <h4 class="modal-title">Coupon</h4>
+                            <h4 class="modal-title">Add New Address</h4>
                             <button type="button" class="close" data-dismiss="modal"
                               onclick="$('#myModal').modal('hide')">&times;</button>
                           </div>
@@ -307,7 +309,7 @@
                 <select class="form-control" id="couponDropdown">
                   <option value="" disabled selected>Select your coupon code</option>
                 </select>
-                <button class="btn btn-dark btn-sm px-4">Apply</button>
+                <button class="btn btn-dark btn-sm px-4" onclick="applyCoupen()">Apply</button>
               </div>
               <!-- PRICE -->
               <div id="totalAmount">
@@ -354,7 +356,7 @@
   <script src="./assets/js/theme.bundle.js"></script>
 
   <script>
-
+    let couponvalue=0;
     let addressList = []
     let cart = [];
     let cartInfo = [];
@@ -493,7 +495,7 @@
           for (const i of coupon_list) {
             console.log("i", i);
             const option = document.createElement("option");
-            option.value = i.code;
+            option.value = i.discount;
             option.textContent = i.code;
             roleSelect.appendChild(option);
           }
@@ -501,6 +503,13 @@
         .catch(error => {
           console.error('Error:', error);
         });
+
+    }
+
+    function applyCoupen(){
+      var coupen= document.getElementById("couponDropdown").value
+      console.log(coupen);
+      couponvalue=coupen ;
 
     }
     // ----------------------------------------------------------------------------------------
@@ -694,7 +703,7 @@
             </div>
             <div>
                 <button type="button" class="btn btn-outline-primary me-2" onclick="editAddress(${element.id})">Edit</button>
-                <button type="button" class="btn btn-outline-danger">Delete</button>
+                <button type="button" class="btn btn-outline-danger" onclick="editAddress(${element.id})">Delete</button>
             </div>
         </div>
     `;
@@ -739,8 +748,12 @@
                   <p class="m-0 fs-6 fw-bolder"> - ₹${cartInfo.totalDiscountprice}</p>
                 </div>
                 <div class="d-flex justify-content-between align-items-center ">
+                  <p class="m-0 fw-bolder fs-6">COUPON</p>
+                  <p class="m-0 fs-6 fw-bolder">₹${couponvalue}</p>
+                </div>
+                <div class="d-flex justify-content-between align-items-center ">
                   <p class="m-0 fw-bolder fs-6">Shipping</p>
-                  <p class="m-0 fs-6 fw-bolder">₹40</p>
+                  <p class="m-0 fs-6 fw-bolder">40</p>
                 </div>
               </div>
               <div class="py-4 border-bottom">
@@ -757,6 +770,49 @@
     }
 
     // ----------------------------------------------------------------------------------------
+    // RAZORPAY-INTEGRATION
+    var options = {
+      "key": "rzp_test_VmZKJXZOFtUsbi",
+      "amount": "49900",
+      "currency": "INR",
+      "name": "Dummy Academy",
+      "description": "Pay & Checkout this Course, Upgrade your DSA Skill",
+      "image": "https://media.geeksforgeeks.org/wp-content/uploads/20210806114908/dummy-200x200.png",
+      "order_id": "order_HdPuQW0s9hY9AU",
+      "handler": function (response) {
+        console.log(response);
+        alert("This step of Payment Succeeded");
+      },
+      "prefill": {
+        "contact": "9876543210",
+        "name": "Twinkle Sharma",
+        "email": "smtwinkle@gmail.com"
+      },
+      "notes": {
+        "description": "Best Course for SDE placements",
+        "language": ["Available in 4 major Languages JAVA", "C/ C++", "Python", "Javascript"],
+        "access": "This course has Lifetime Access"
+      },
+      "theme": {
+        "color": "#2300a3"
+      }
+    };
+
+    var razorpayObject = new Razorpay(options);
+    console.log(razorpayObject);
+
+    razorpayObject.on('payment.failed', function (response) {
+      console.log(response);
+      alert("This step of Payment Failed");
+    });
+
+    document.getElementById('pay-button').onclick = function (e) {
+      razorpayObject.open();
+      e.preventDefault();
+    };
+
+    // ----------------------------------------------------------------------------------------
+
   </script>
 </body>
 

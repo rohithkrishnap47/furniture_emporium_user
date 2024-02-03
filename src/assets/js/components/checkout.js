@@ -4,7 +4,7 @@
     const paymentToggles = document.querySelectorAll('[name="checkoutPaymentMethod"]') || [];
     const cardFields = document.querySelector('.card-details');
     const paypalInfo = document.querySelector('.paypal-details');
-    const STRIPE_ID = 'checoutPaymentStripe';
+    const STRIPE_ID = 'COD';
     const PAYPAL_ID = 'checkoutPaymentPaypal';
 
 

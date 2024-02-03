@@ -659,6 +659,11 @@
     }
 
     // ----------------------------------------------------------------------------------------
+    // EDIT-ADDRESS FUNCTION
+    function editAddress(addressId) {
+      console.log("Editing address with ID:", addressId);
+    }
+    // ----------------------------------------------------------------------------------------
     // SET-ADDRESS
     function setAddressData() {
       console.log(addressList);
@@ -688,11 +693,12 @@
                 
             </div>
             <div>
-                <button type="button" class="btn btn-outline-primary me-2">Edit</button>
+                <button type="button" class="btn btn-outline-primary me-2" onclick="editAddress(${element.id})">Edit</button>
                 <button type="button" class="btn btn-outline-danger">Delete</button>
             </div>
         </div>
     `;
+
 
         // Append the address card to the container
         addressContainer.appendChild(addressCard);

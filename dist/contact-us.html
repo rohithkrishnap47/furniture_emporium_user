@@ -262,36 +262,45 @@
 
 
         // fetching  form data
-        document.addEventListener('DOMContentLoaded', function () {
+        document.addEventListener("DOMContentLoaded", function () {
             const form = document.querySelector('form');
 
-            form.addEventListener('submit', function (e) {
-                e.preventDefault();
+            form.addEventListener('submit', function (event) {
+                event.preventDefault(); // Prevent the form from submitting normally
 
+                // Get form values
                 const firstName = document.getElementById('first_name').value;
                 const lastName = document.getElementById('last_name').value;
                 const email = document.getElementById('email').value;
                 const phoneNumber = document.getElementById('phone_number').value;
                 const message = document.getElementById('message').value;
 
-                const formData = new FormData();
-                formData.append('entry.1234567890', firstName); // Replace '1234567890' with the actual entry ID for First Name
-                formData.append('entry.0987654321', lastName); // Replace '0987654321' with the actual entry ID for Last Name
-                formData.append('entry.2468013579', email); // Replace '2468013579' with the actual entry ID for Email
-                formData.append('entry.1357924680', phoneNumber); // Replace '1357924680' with the actual entry ID for Phone Number
-                formData.append('entry.5678901234', message); // Replace '5678901234' with the actual entry ID for Message
+                // Construct data object
+                const formData = {
+                    firstName: firstName,
+                    lastName: lastName,
+                    email: email,
+                    phoneNumber: phoneNumber,
+                    message: message
+                };
 
-                fetch('https://forms.gle/yt7WtsXtxPFLFKNA6', {
+                // You can now send this formData to your backend for processing
+                // Example: Send data using fetch API
+                fetch('/submit-contact-form', {
                     method: 'POST',
-                    body: formData,
-                    mode: 'no-cors'
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(formData),
                 })
                     .then(response => {
                         if (response.ok) {
-                            // Handle success (e.g., show a success message)
+                            // Handle success
                             console.log('Form submitted successfully');
+                            // Optionally, clear the form inputs
+                            form.reset();
                         } else {
-                            // Handle errors (e.g., show an error message)
+                            // Handle error
                             console.error('Form submission failed');
                         }
                     })
@@ -300,6 +309,7 @@
                     });
             });
         });
+
 
 
     </script>

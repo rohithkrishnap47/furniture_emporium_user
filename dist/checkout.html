@@ -308,7 +308,7 @@
                 <select class="form-control" id="couponDropdown">
                   <option value="" disabled selected>Select your coupon code</option>
                 </select>
-                <button class="btn btn-dark btn-sm px-4" onclick="applyCoupen()">Apply</button>
+                <button class="btn btn-dark btn-sm px-4" onclick="applyCoupon()">Apply</button>
               </div>
               <!-- PRICE -->
               <div id="totalAmount">
@@ -355,6 +355,7 @@
   <script src="./assets/js/theme.bundle.js"></script>
 
   <script>
+    let couponId = 0;
     let couponvalue = 0;
     let addressList = []
     let cart = [];
@@ -408,12 +409,13 @@
           });
           return;
         }
+
         const data = {
           product: cartInfo.cartProducts.map(item => item._id),
           deliveryAddress: selected_address,
           cartDetails: selected_address,
-          couponUsed: "",
-          PaymentMethod: paymentMeth
+          couponUsed: couponId,
+          PaymentMethod: paymentMeth,
         }
 
         console.log("shipping data", data);
@@ -428,8 +430,15 @@
           const responseData = await response.json();
           console.log("placeorder", responseData);
           console.log("Order placed successfully!");
-          razorpayObject.open();
-          payment()
+
+          // checking COD or NOT ---------------------------------------------------
+          if (paymentMeth != "COD") {
+            initRazorpay(responseData)
+          }
+          else {
+            window.location.href = "http://127.0.0.1:5508/dist/order_success.html?id="+responseData._id;
+          }
+
         } else {
           console.error("Failed to place order. Status code:", response.status);
           // Handle other status codes or errors here
@@ -441,7 +450,8 @@
     }
     // ----------------------------------------------------------------------------------------
     // RAZORPAY INTEGRATION
-    function payment(order) {
+    function initRazorpay(order) {
+      console.log("ldf-varum", order);
       var options = {
         "key": "rzp_test_VmZKJXZOFtUsbi",
         "amount": order.amount,
@@ -453,6 +463,7 @@
         "handler": function (response) {
           console.log(response);
           alert("This step of Payment Succeeded");
+          window.location.href = "http://127.0.0.1:5508/dist/order_success.html";
         },
         "prefill": {
           // Here we are prefilling random contact
@@ -474,10 +485,17 @@
       var razorpayObject = new Razorpay(options);
       console.log(razorpayObject);
       razorpayObject.on('payment.failed', function (response) {
-        console.log(response);
+        console.log("payment-failure", response);
         alert("This step of Payment Failed");
+
+      });
+      razorpayObject.on('payment.success', function (response) {
+        console.log("payment-success", response);
+        alert("Payment Successful");
+
       });
 
+      razorpayObject.open();
     }
 
 
@@ -500,6 +518,8 @@
           for (const i of coupon_list) {
             console.log("i", i);
             const option = document.createElement("option");
+            couponId = i._id
+            console.log("couponId", couponId);
             option.value = i.discount;
             option.textContent = i.code;
             roleSelect.appendChild(option);
@@ -511,11 +531,11 @@
 
     }
 
-    function applyCoupen() {
-      var coupen = document.getElementById("couponDropdown").value
-      console.log(coupen);
-      couponvalue = coupen;
-
+    function applyCoupon() {
+      var coupon = document.getElementById("couponDropdown").value
+      console.log(coupon);
+      couponvalue = coupon;
+      setTotal(cartInfo)
     }
     // ----------------------------------------------------------------------------------------
 
@@ -742,8 +762,8 @@
       console.log("totalPrice", totalPrice);
       console.log("cartInfo.price", cartInfo.price);
       // console.log("totalPrice",totalPrice);
-      const priceTot = document.createElement("div");
-      priceTot.innerHTML = `              <div class="py-4 border-bottom">
+      // const priceTot = document.createElement("div");
+      priceContainer.innerHTML = `              <div class="py-4 border-bottom">
                 <div class="d-flex justify-content-between align-items-center mb-2">
                   <p class="m-0 fw-bolder fs-6">Total</p>
                   <p class="m-0 fs-6 fw-bolder">₹${cartInfo.totalPrice}</p>
@@ -753,7 +773,7 @@
                   <p class="m-0 fs-6 fw-bolder"> - ₹${cartInfo.totalDiscountprice}</p>
                 </div>
                 <div class="d-flex justify-content-between align-items-center ">
-                  <p class="m-0 fw-bolder fs-6">COUPON</p>
+                  <p class="m-0 fw-bolder fs-6">Coupon Discount</p>
                   <p class="m-0 fs-6 fw-bolder">₹${couponvalue}</p>
                 </div>
                 <div class="d-flex justify-content-between align-items-center ">
@@ -767,7 +787,7 @@
                     <p class="m-0 fw-bold fs-5">Grand Total</p>
                     <span class="text-muted small"></span>
                   </div>
-                  <p class="m-0 fs-5 fw-bold">₹${cartInfo.totalPrice + 40 - cartInfo.totalDiscountprice}</p>
+                  <p class="m-0 fs-5 fw-bold">₹${cartInfo.grandTotal-couponvalue}</p>
                 </div>
               </div>`;
 

@@ -436,7 +436,7 @@
             initRazorpay(responseData)
           }
           else {
-            window.location.href = "http://127.0.0.1:5508/dist/order_success.html?id="+responseData._id;
+            window.location.href = "http://127.0.0.1:5508/dist/order_placed_COD.html?id="+responseData._id;
           }
 
         } else {
@@ -458,7 +458,7 @@
         "currency": "INR",
         "name": "Furniture Emporium",
         "description": "Pay & Checkout this product, Upgrade your home with F-Empo",
-        "image": "https://media.geeksforgeeks.org/wp-content/uploads/20210806114908/dummy-200x200.png",
+        "image": "https://drive.google.com/drive/u/0/folders/1KOwhX14k_22o6ElbVMW_kuOAEIckfD3U",
         "order_id": order.orderId,
         "handler": function (response) {
           console.log(response);
@@ -473,12 +473,12 @@
           "email": "smtwinkle@gmail.com"
         },
         "notes": {
-          "description": "Best Course for SDE placements",
+          "description": "Best product available",
           "language": "Available in 4 major Languages JAVA, C/C++, Python, Javascript",
           "access": "This course have Lifetime Access"
         },
         "theme": {
-          "color": "#2300a3"
+          "color": "#fff766"
         }
       };
 

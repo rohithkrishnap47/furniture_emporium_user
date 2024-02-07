@@ -84,10 +84,10 @@
             <nav class="d-none d-md-block">
               <ul class="list-unstyled d-flex justify-content-start mt-4 align-items-center fw-bolder small">
                 <li class="me-4"><a class="nav-link-checkout " href="./cart.html">Your Cart</a></li>
-                <li class="me-4"><a class="nav-link-checkout active" href="./checkout.html">Information</a></li>
+                <li class="me-4"><a class="nav-link-chec active" href="./checkout.html">Checkout & Payment</a></li>
                 <!-- CHECK-OUT  SHIPPING  -->
                 <!-- <li class="me-4"><a class="nav-link-checkout " href="./checkout-shipping.html">Shipping</a></li> -->
-                <li><a class="nav-link-checkout nav-link-last " href="./checkout-payment.html">Payment</a></li>
+                <!-- <li><a class="nav-link-checkout nav-link-last " href="./checkout-payment.html">Payment</a></li> -->
               </ul>
             </nav>
             <div class="mt-5">
@@ -366,6 +366,7 @@
       'Content-Type': 'application/json'
     };
     var selected_address
+    var addressId
     const paymentToggles = document.querySelectorAll('[name="checkoutPaymentMethod"]') || [];
     var paymentMeth;
     // ----------------------------------------------------------------------------------------
@@ -436,7 +437,7 @@
             initRazorpay(responseData)
           }
           else {
-            window.location.href = "http://127.0.0.1:5508/dist/order_placed_COD.html?id="+responseData._id;
+            window.location.href = "http://127.0.0.1:5508/dist/order_placed_COD.html?id=" + responseData._id;
           }
 
         } else {
@@ -478,7 +479,7 @@
           "access": "This course have Lifetime Access"
         },
         "theme": {
-          "color": "#fff766"
+          "color": "#00bcd4"
         }
       };
 
@@ -692,10 +693,15 @@
       })
     }
 
-    // ----------------------------------------------------------------------------------------
     // EDIT-ADDRESS FUNCTION
     function editAddress(addressId) {
       console.log("Editing address with ID:", addressId);
+
+    }
+    // ----------------------------------------------------------------------------------------
+    // DELETE-ADDRESS FUNCTION
+    function deleteAddress(addressId) {
+      console.log("DELETE address with ID:", addressId);
     }
     // ----------------------------------------------------------------------------------------
     // SET-ADDRESS
@@ -722,31 +728,40 @@
                     <input type="radio" class="form-check-input" name="addressSelection" id="address${element.id}" >
                     <label class="form-check-label" for="address${element.id}">
                         ${element.firstname + " " + element.lastname}
+                        
                     </label>
                 </div>
                 
             </div>
             <div>
-                <button type="button" class="btn btn-outline-primary me-2" onclick="editAddress(${element.id})">Edit</button>
-                <button type="button" class="btn btn-outline-danger" onclick="editAddress(${element.id})">Delete</button>
+                <button type="button" class="btn btn-outline-primary me-2" id="editButton"  >Edit</button>
+                <button type="button" class="btn btn-outline-danger"id="deleteButton" onclick="deleteAddress(${element._id})">Delete</button>
             </div>
         </div>
     `;
 
-
+        // EDIT BUTTON LOGIC------------------------------------------------
+        const editButton = addressCard.querySelector("#editButton");
+        console.log("edit", editButton);
+        editButton.addEventListener("click",()=> editAddress(element._id));
+        // DELETE BUTTON LOGIC----------------------------------------------
+        const deleteButton = addressCard.querySelector("#deleteButton");
+        console.log("edit", deleteButton);
+        deleteButton.addEventListener("click",()=> deleteAddress(element._id));
         // Append the address card to the container
         addressContainer.appendChild(addressCard);
-
         // Add event listener to the radio button
         const radioBtn = addressCard.querySelector(`#address${element.id}`);
         radioBtn.addEventListener('change', () => {
           if (radioBtn.checked) {
             // Handle the selected radio data
             selected_address = element
+            addressId = element._id
+            console.log(' add IDD:', addressId);
             console.log('Selected address:', element);
+
           }
           else {
-
           }
         });
       });
@@ -787,7 +802,7 @@
                     <p class="m-0 fw-bold fs-5">Grand Total</p>
                     <span class="text-muted small"></span>
                   </div>
-                  <p class="m-0 fs-5 fw-bold">₹${cartInfo.grandTotal-couponvalue}</p>
+                  <p class="m-0 fs-5 fw-bold">₹${cartInfo.grandTotal - couponvalue}</p>
                 </div>
               </div>`;
 

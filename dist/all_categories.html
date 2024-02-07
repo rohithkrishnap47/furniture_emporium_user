@@ -41,11 +41,15 @@
             .simplebar-content-wrapper {
                 overflow: auto;
             }
+
+            #navigateToproduct {
+                object-fit: contain;
+            }
         </style>
     </noscript>
-
+    <script src="/css/style.css"></script>
     <!-- Page Title -->
-    <title>Furniture Emporium | Category</title>
+    <title>Furniture</title>
 
 </head>
 
@@ -91,8 +95,13 @@
                                 <div class="input-group mb-3 h-100">
                                     <span class="input-group-text px-4 bg-transparent border-0"><i
                                             class="ri-search-line ri-lg"></i></span>
-                                    <input type="text" class="form-control text-body bg-transparent border-0"
-                                        placeholder="Enter your search terms...">
+                                    <form class=" form-control text-body bg-transparent border-0"
+                                        onsubmit="searchProducts()" action="">
+                                        <input id="productSearch" type="text"
+                                            class="form-control text-body bg-transparent border-0"
+                                            placeholder="Let us know , what you are looking for ...">
+                                    </form>
+
                                     <span
                                         class="input-group-text px-4 cursor-pointer disable-child-pointer close-search bg-transparent border-0"><i
                                             class="ri-close-circle-line ri-lg"></i></span>
@@ -115,8 +124,6 @@
                                 <li><a class="dropdown-item" id="username" href="./userdetail.html"
                                         style="font-weight: bold;">Profile</a></li>
                                 <li><a class="dropdown-item" id="login" href="./login.html">Login / Signup</a></li>
-                                <li><a class="dropdown-item" href="./cart.html">Cart</a></li>
-                                <li><a class="dropdown-item" href="./checkout.html">Checkout</a></li>
                                 <li><a class="dropdown-item" id="logout" onclick="logout()">Logout</a></li>
 
 
@@ -134,21 +141,26 @@
 
                                 <!-- Cart Header-->
                                 <div class="d-flex justify-content-between align-items-center border-bottom pt-3 pb-4">
-                                    <h6 class="fw-bolder m-0">Cart Summary (2 items)</h6>
+                                    <h6 class="fw-bolder m-0">Cart</h6>
                                     <i class="ri-close-circle-line text-muted ri-lg cursor-pointer btn-close-cart"></i>
                                 </div>
                                 <!-- / Cart Header-->
 
                                 <!-- Cart Items-->
                                 <div>
-
+                                    <div>
+                                        <div class="pt-3">
+                                        </div>
+                                        <a href="./cart.html" class="btn btn-outline-dark w-100 text-center mt-4"
+                                            role="button">View Cart</a>
+                                        <a href="./checkout.html" class="btn btn-dark w-100 text-center mt-2"
+                                            role="button">Proceed To Checkout</a>
+                                    </div>
                                     <!-- Cart Product-->
-                                    <div class="row mx-0 py-4 g-0 border-bottom">
+                                    <!-- <div class="row mx-0 py-4 g-0 border-bottom">
                                         <div class="col-2 position-relative">
                                             <picture class="d-block ">
-                                                <img class="img-fluid"
-                                                    src="./assets/images/categories/product-cart-1.jpg"
-                                                    alt="HTML Bootstrap Template by Pixel Rocket">
+                                                <img class="img-fluid" src="./assets/images/products/product-cart-1.jpg" alt="HTML Bootstrap Template by Pixel Rocket">
                                             </picture>
                                         </div>
                                         <div class="col-9 offset-1">
@@ -157,54 +169,13 @@
                                                     Nike Air VaporMax 2021
                                                     <i class="ri-close-line ms-3"></i>
                                                 </h6>
-                                                <span class="d-block text-muted fw-bolder text-uppercase fs-9">Size: 9 /
-                                                    Qty: 1</span>
+                                                <span class="d-block text-muted fw-bolder text-uppercase fs-9">Size: 9 / Qty: 1</span>
                                             </div>
                                             <p class="fw-bolder text-end text-muted m-0">$85.00</p>
                                         </div>
-                                    </div>
-                                    <!-- Cart Product-->
-                                    <div class="row mx-0 py-4 g-0 border-bottom">
-                                        <div class="col-2 position-relative">
-                                            <picture class="d-block ">
-                                                <img class="img-fluid"
-                                                    src="./assets/images/categories/product-cart-2.jpg"
-                                                    alt="HTML Bootstrap Template by Pixel Rocket">
-                                            </picture>
-                                        </div>
-                                        <div class="col-9 offset-1">
-                                            <div>
-                                                <h6 class="justify-content-between d-flex align-items-start mb-2">
-                                                    Nike ZoomX Vaporfly
-                                                    <i class="ri-close-line ms-3"></i>
-                                                </h6>
-                                                <span class="d-block text-muted fw-bolder text-uppercase fs-9">Size: 11
-                                                    / Qty: 1</span>
-                                            </div>
-                                            <p class="fw-bolder text-end text-muted m-0">$125.00</p>
-                                        </div>
-                                    </div>
+                                    </div> -->
                                 </div>
-                                <!-- /Cart Items-->
 
-                                <!-- Cart Summary-->
-                                <div>
-                                    <div class="pt-3">
-                                        <div
-                                            class="d-flex flex-column flex-md-row justify-content-md-between align-items-md-start mb-4 mb-md-2">
-                                            <div>
-                                                <p class="m-0 fw-bold fs-5">Grand Total</p>
-                                                <span class="text-muted small">Inc $45.89 sales tax</span>
-                                            </div>
-                                            <p class="m-0 fs-5 fw-bold">$422.99</p>
-                                        </div>
-                                    </div>
-                                    <a href="./cart.html" class="btn btn-outline-dark w-100 text-center mt-4"
-                                        role="button">View Cart</a>
-                                    <a href="./checkout.html" class="btn btn-dark w-100 text-center mt-2"
-                                        role="button">Proceed To Checkout</a>
-                                </div>
-                                <!-- / Cart Summary-->
                             </div>
 
 
@@ -221,9 +192,10 @@
                         <!-- Menu-->
                         <ul class="navbar-nav mx-auto mb-2 mb-lg-0">
                             <li class="nav-item dropdown dropdown position-static">
-                                <!-- <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                OFFERS
-                              </a> -->
+                                <!-- <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                                    aria-expanded="false">
+                                    Men
+                                </a> -->
                                 <!-- Menswear dropdown menu-->
                                 <div class="dropdown-menu dropdown-megamenu">
                                     <div class="container-fluid">
@@ -443,7 +415,7 @@
                                                                         alt="HTML Bootstrap Template by Pixel Rocket">
                                                                 </picture>
                                                                 <a class="fw-bolder link-cover"
-                                                                    href="./category.html">T-Shirts</a>
+                                                                    href="./category.html">Furniture</a>
                                                             </div>
                                                         </div>
                                                         <div class="col-12 col-md-6">
@@ -487,9 +459,26 @@
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" href="./all_products.html" role="button">
-                                    categories
+                                    Products
                                 </a>
                             </li>
+                            <!-- <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                                    aria-expanded="false">
+                                    Pages
+                                </a>
+                                <ul class="dropdown-menu">
+                                    <li><a class="dropdown-item" href="./index.html">Homepage</a></li>
+                                    <li><a class="dropdown-item" href="./category.html">Category</a></li>
+                                    <li><a class="dropdown-item" href="./product.html">Product</a></li>
+                                    <li><a class="dropdown-item" href="./cart.html">Cart</a></li>
+                                    <li><a class="dropdown-item" href="./checkout.html">Checkout</a></li>
+                                    <li><a class="dropdown-item" href="./login.html">Login</a></li>
+                                    <li><a class="dropdown-item" href="./register.html">Register</a></li>
+                                    <li><a class="dropdown-item" href="./forgotten-password.html">Forgotten Password</a>
+                                    </li>
+                                </ul>
+                            </li> -->
                             <!-- <li class="nav-item dropdown">
                                 <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
                                     aria-expanded="false">
@@ -511,7 +500,6 @@
 
                     </div>
                     <!-- / Main Navigation-->
-
                 </div>
             </div>
         </div>
@@ -525,19 +513,21 @@
             <!-- Category Toolbar-->
             <div class="d-flex justify-content-between items-center pt-5 pb-4 flex-column flex-lg-row">
                 <div>
-                    <!-- <nav aria-label="breadcrumb">
+                    <nav aria-label="breadcrumb">
                         <ol class="breadcrumb">
-                            <li class="breadcrumb-item"><a href="#">Home</a></li>
+                            <!-- <li class="breadcrumb-item"><a href="#">Home</a></li>
                             <li class="breadcrumb-item"><a href="#">Sneakers</a></li>
-                            <li class="breadcrumb-item active" aria-current="page">New Releases</li>
+                            <li class="breadcrumb-item active" aria-current="page">New Releases</li> -->
                         </ol>
-                    </nav> -->
-                    <h1 class="fw-bold fs-3 mb-2">CATEGORIES</h1>
+                    </nav>
+
+                    <h1 id="productsCount" class="fw-bold fs-3 mb-2"></h1>
+                    <p id="paginationData" class="m-0 text-muted small"> </p>
                 </div>
                 <div class="d-flex justify-content-end align-items-center mt-4 mt-lg-0 flex-column flex-md-row">
 
                     <!-- Filter Trigger-->
-                    <button
+                    <button onclick="showcategories()"
                         class="btn bg-light p-3 me-md-3 d-flex align-items-center fs-7 lh-1 w-100 mb-2 mb-md-0 w-md-auto "
                         type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasFilters"
                         aria-controls="offcanvasFilters">
@@ -545,264 +535,68 @@
                     </button>
                     <!-- / Filter Trigger-->
 
-                    <!-- Sort Options-->
-                    <select class="form-select form-select-sm border-0 bg-light p-3 pe-5 lh-1 fs-7">
+                    <!-- SORT Options-->
+                    <select onclick="sorting()" id="mySelect"
+                        class="form-select form-select-sm border-0 bg-light p-3 pe-5 lh-1 fs-7">
                         <option selected>Sort By</option>
-                        <option value="1">Hi Low</option>
-                        <option value="2">Low Hi</option>
-                        <option value="3">Name</option>
+                        <option value="high">High Low</option>
+                        <option value="low">Low High</option>
+                        <option value="a">Name(a-z)</option>
+                        <option value="z">Name(z-a)</option>
                     </select>
                     <!-- / Sort Options-->
                 </div>
             </div> <!-- /Category Toolbar-->
 
-            <!-- categories-->
+            <!-- Products  Listing-->
+
+
             <div class="row g-4">
-                <div class="col-12 col-sm-6 col-lg-4">
+                <div class="swiper-wrapper row g-2" id="productlisting"></div>
+                <div class="">
                     <!-- Card Product-->
-                    <div class="card border border-transparent position-relative overflow-hidden h-100 transparent">
+                    <!-- <div class="card border border-transparent position-relative overflow-hidden h-100 transparent">
                         <div class="card-img position-relative">
                             <div class="card-badges">
                                 <span class="badge badge-card"><span
-                                        class="f-w-2 f-h-2 bg-danger rounded-circle d-block me-1"></span> Sale</span>
+                                        class="f-w-2 f-h-2 bg-danger rounded-circle d-block me-1"></span>
+                                    Sale</span>
                             </div>
                             <span class="position-absolute top-0 end-0 p-2 z-index-20 text-muted"><i
                                     class="ri-heart-line"></i></span>
                             <picture class="position-relative overflow-hidden d-block bg-light">
                                 <img class="w-100 img-fluid position-relative z-index-10" title=""
-                                    src="./assets/images/categories/product-1.jpg" alt="">
+                                    src="./assets/images/products/product-1.jpg" alt="">
                             </picture>
                             <div class="position-absolute start-0 bottom-0 end-0 z-index-20 p-2">
-                                <button class="btn btn-quick-add"><i class="ri-add-line me-2"></i> Quick Add</button>
+                                <button class="btn btn-quick-add"><i class="ri-add-line me-2"></i> Quick
+                                    Add</button>
                             </div>
                         </div>
                         <div class="card-body px-0">
-                            <a class="text-decoration-none link-cover" href="./product.html">Nike Air VaporMax 2021</a>
+                            <a class="text-decoration-none link-cover" href="./product.html">Nike Air VaporMax
+                                2021</a>
                             <small class="text-muted d-block">4 colours, 10 sizes</small>
                             <p class="mt-2 mb-0 small"><s class="text-muted">$329.99</s> <span
                                     class="text-danger">$198.66</span></p>
                         </div>
                     </div>
-                    <!--/ Card Product-->
+                    / Card Product-->
                 </div>
-                <div class="col-12 col-sm-6 col-lg-4">
-                    <!-- Card Product-->
-                    <div class="card border border-transparent position-relative overflow-hidden h-100 transparent">
-                        <div class="card-img position-relative">
-                            <div class="card-badges">
-                                <span class="badge badge-card"><span
-                                        class="f-w-2 f-h-2 bg-success rounded-circle d-block me-1"></span> New In</span>
-                            </div>
-                            <span class="position-absolute top-0 end-0 p-2 z-index-20 text-muted"><i
-                                    class="ri-heart-line"></i></span>
-                            <picture class="position-relative overflow-hidden d-block bg-light">
-                                <img class="w-100 img-fluid position-relative z-index-10" title=""
-                                    src="./assets/images/categories/product-2.jpg" alt="">
-                            </picture>
-                            <div class="position-absolute start-0 bottom-0 end-0 z-index-20 p-2">
-                                <button class="btn btn-quick-add"><i class="ri-add-line me-2"></i> Quick Add</button>
-                            </div>
-                        </div>
-                        <div class="card-body px-0">
-                            <a class="text-decoration-none link-cover" href="./product.html">Nike ZoomX Vaporfly</a>
-                            <small class="text-muted d-block">2 colours, 4 sizes</small>
-                            <p class="mt-2 mb-0 small">$275.45</p>
-                        </div>
-                    </div>
-                    <!--/ Card Product-->
-                </div>
-                <div class="col-12 col-sm-6 col-lg-4">
-                    <!-- Card Product-->
-                    <div class="card border border-transparent position-relative overflow-hidden h-100 transparent">
-                        <div class="card-img position-relative">
-                            <div class="card-badges">
-                                <span class="badge badge-card"><span
-                                        class="f-w-2 f-h-2 bg-secondary rounded-circle d-block me-1"></span> Sold
-                                    Out</span>
-                            </div>
-                            <span class="position-absolute top-0 end-0 p-2 z-index-20 text-muted"><i
-                                    class="ri-heart-line"></i></span>
-                            <picture class="position-relative overflow-hidden d-block bg-light">
-                                <img class="w-100 img-fluid position-relative z-index-10" title=""
-                                    src="./assets/images/categories/product-3.jpg" alt="">
-                            </picture>
-                        </div>
-                        <div class="card-body px-0">
-                            <a class="text-decoration-none link-cover" href="./product.html">Nike Blazer Mid
-                                &#x27;77</a>
-                            <small class="text-muted d-block">5 colours, 6 sizes</small>
-                            <p class="mt-2 mb-0 small text-muted">Sold Out</p>
-                        </div>
-                    </div>
-                    <!--/ Card Product-->
-                </div>
-                <div class="col-12 col-sm-6 col-lg-4">
-                    <!-- Card Product-->
-                    <div class="card border border-transparent position-relative overflow-hidden h-100 transparent">
-                        <div class="card-img position-relative">
-                            <div class="card-badges">
-                            </div>
-                            <span class="position-absolute top-0 end-0 p-2 z-index-20 text-muted"><i
-                                    class="ri-heart-line"></i></span>
-                            <picture class="position-relative overflow-hidden d-block bg-light">
-                                <img class="w-100 img-fluid position-relative z-index-10" title=""
-                                    src="./assets/images/categories/product-4.jpg" alt="">
-                            </picture>
-                            <div class="position-absolute start-0 bottom-0 end-0 z-index-20 p-2">
-                                <button class="btn btn-quick-add"><i class="ri-add-line me-2"></i> Quick Add</button>
-                            </div>
-                        </div>
-                        <div class="card-body px-0">
-                            <a class="text-decoration-none link-cover" href="./product.html">Nike Air Force 1</a>
-                            <small class="text-muted d-block">6 colours, 9 sizes</small>
-                            <p class="mt-2 mb-0 small">$425.85</p>
-                        </div>
-                    </div>
-                    <!--/ Card Product-->
-                </div>
-                <div class="col-12 col-sm-6 col-lg-4">
-                    <!-- Card Product-->
-                    <div class="card border border-transparent position-relative overflow-hidden h-100 transparent">
-                        <div class="card-img position-relative">
-                            <div class="card-badges">
-                                <span class="badge badge-card"><span
-                                        class="f-w-2 f-h-2 bg-danger rounded-circle d-block me-1"></span> Sale</span>
-                            </div>
-                            <span class="position-absolute top-0 end-0 p-2 z-index-20 text-muted"><i
-                                    class="ri-heart-line"></i></span>
-                            <picture class="position-relative overflow-hidden d-block bg-light">
-                                <img class="w-100 img-fluid position-relative z-index-10" title=""
-                                    src="./assets/images/categories/product-5.jpg" alt="">
-                            </picture>
-                            <div class="position-absolute start-0 bottom-0 end-0 z-index-20 p-2">
-                                <button class="btn btn-quick-add"><i class="ri-add-line me-2"></i> Quick Add</button>
-                            </div>
-                        </div>
-                        <div class="card-body px-0">
-                            <a class="text-decoration-none link-cover" href="./product.html">Nike Air Max 90</a>
-                            <small class="text-muted d-block">4 colours, 10 sizes</small>
-                            <p class="mt-2 mb-0 small"><s class="text-muted">$196.99</s> <span
-                                    class="text-danger">$98.66</span></p>
-                        </div>
-                    </div>
-                    <!--/ Card Product-->
-                </div>
-                <div class="col-12 col-sm-6 col-lg-4">
-                    <!-- Card Product-->
-                    <div class="card border border-transparent position-relative overflow-hidden h-100 transparent">
-                        <div class="card-img position-relative">
-                            <div class="card-badges">
-                                <span class="badge badge-card"><span
-                                        class="f-w-2 f-h-2 bg-danger rounded-circle d-block me-1"></span> Sale</span>
-                                <span class="badge badge-card"><span
-                                        class="f-w-2 f-h-2 bg-success rounded-circle d-block me-1"></span> New In</span>
-                            </div>
-                            <span class="position-absolute top-0 end-0 p-2 z-index-20 text-muted"><i
-                                    class="ri-heart-line"></i></span>
-                            <picture class="position-relative overflow-hidden d-block bg-light">
-                                <img class="w-100 img-fluid position-relative z-index-10" title=""
-                                    src="./assets/images/categories/product-6.jpg" alt="">
-                            </picture>
-                            <div class="position-absolute start-0 bottom-0 end-0 z-index-20 p-2">
-                                <button class="btn btn-quick-add"><i class="ri-add-line me-2"></i> Quick Add</button>
-                            </div>
-                        </div>
-                        <div class="card-body px-0">
-                            <a class="text-decoration-none link-cover" href="./product.html">Nike Glide FlyEase</a>
-                            <small class="text-muted d-block">1 colour</small>
-                            <p class="mt-2 mb-0 small"><s class="text-muted">$329.99</s> <span
-                                    class="text-danger">$198.66</span></p>
-                        </div>
-                    </div>
-                    <!--/ Card Product-->
-                </div>
-                <div class="col-12 col-sm-6 col-lg-4">
-                    <!-- Card Product-->
-                    <div class="card border border-transparent position-relative overflow-hidden h-100 transparent">
-                        <div class="card-img position-relative">
-                            <div class="card-badges">
-                            </div>
-                            <span class="position-absolute top-0 end-0 p-2 z-index-20 text-muted"><i
-                                    class="ri-heart-line"></i></span>
-                            <picture class="position-relative overflow-hidden d-block bg-light">
-                                <img class="w-100 img-fluid position-relative z-index-10" title=""
-                                    src="./assets/images/categories/product-7.jpg" alt="">
-                            </picture>
-                            <div class="position-absolute start-0 bottom-0 end-0 z-index-20 p-2">
-                                <button class="btn btn-quick-add"><i class="ri-add-line me-2"></i> Quick Add</button>
-                            </div>
-                        </div>
-                        <div class="card-body px-0">
-                            <a class="text-decoration-none link-cover" href="./product.html">Nike Zoom Freak</a>
-                            <small class="text-muted d-block">2 colours, 2 sizes</small>
-                            <p class="mt-2 mb-0 small">$444.99</p>
-                        </div>
-                    </div>
-                    <!--/ Card Product-->
-                </div>
-                <div class="col-12 col-sm-6 col-lg-4">
-                    <!-- Card Product-->
-                    <div class="card border border-transparent position-relative overflow-hidden h-100 transparent">
-                        <div class="card-img position-relative">
-                            <div class="card-badges">
-                                <span class="badge badge-card"><span
-                                        class="f-w-2 f-h-2 bg-success rounded-circle d-block me-1"></span> New In</span>
-                            </div>
-                            <span class="position-absolute top-0 end-0 p-2 z-index-20 text-muted"><i
-                                    class="ri-heart-line"></i></span>
-                            <picture class="position-relative overflow-hidden d-block bg-light">
-                                <img class="w-100 img-fluid position-relative z-index-10" title=""
-                                    src="./assets/images/categories/product-8.jpg" alt="">
-                            </picture>
-                            <div class="position-absolute start-0 bottom-0 end-0 z-index-20 p-2">
-                                <button class="btn btn-quick-add"><i class="ri-add-line me-2"></i> Quick Add</button>
-                            </div>
-                        </div>
-                        <div class="card-body px-0">
-                            <a class="text-decoration-none link-cover" href="./product.html">Nike Air Pegasus</a>
-                            <small class="text-muted d-block">3 colours, 10 sizes</small>
-                            <p class="mt-2 mb-0 small">$178.99</p>
-                        </div>
-                    </div>
-                    <!--/ Card Product-->
-                </div>
-                <div class="col-12 col-sm-6 col-lg-4">
-                    <!-- Card Product-->
-                    <div class="card border border-transparent position-relative overflow-hidden h-100 transparent">
-                        <div class="card-img position-relative">
-                            <div class="card-badges">
-                                <span class="badge badge-card"><span
-                                        class="f-w-2 f-h-2 bg-success rounded-circle d-block me-1"></span> New In</span>
-                            </div>
-                            <span class="position-absolute top-0 end-0 p-2 z-index-20 text-muted"><i
-                                    class="ri-heart-line"></i></span>
-                            <picture class="position-relative overflow-hidden d-block bg-light">
-                                <img class="w-100 img-fluid position-relative z-index-10" title=""
-                                    src="./assets/images/categories/product-1.jpg" alt="">
-                            </picture>
-                            <div class="position-absolute start-0 bottom-0 end-0 z-index-20 p-2">
-                                <button class="btn btn-quick-add"><i class="ri-add-line me-2"></i> Quick Add</button>
-                            </div>
-                        </div>
-                        <div class="card-body px-0">
-                            <a class="text-decoration-none link-cover" href="./product.html">Nike Air Jordans</a>
-                            <small class="text-muted d-block">3 colours, 10 sizes</small>
-                            <p class="mt-2 mb-0 small">$154.99</p>
-                        </div>
-                    </div>
-                    <!--/ Card Product-->
-                </div>
+
             </div>
-            <!-- / categories-->
+            <!-- / Products-->
 
             <!-- Pagination-->
             <div class="d-flex flex-column f-w-44 mx-auto my-5 text-center">
-                <small class="text-muted">Showing 9 of 121 categories</small>
+                <small class="text-muted">Showing 9 of 121 products</small>
                 <div class="progress f-h-1 mt-3">
                     <div class="progress-bar bg-dark" role="progressbar" style="width: 25%" aria-valuenow="25"
                         aria-valuemin="0" aria-valuemax="100"></div>
                 </div>
-                <a href="#" class="btn btn-outline-dark btn-sm mt-5 align-self-center py-3 px-4 border-2">Load More</a>
+                <a href="#" id="load-more-btn"
+                    class="btn btn-outline-dark btn-sm mt-5 align-self-center py-3 px-4 border-2">Load
+                    More</a>
             </div> <!-- / Pagination-->
         </div>
 
@@ -827,11 +621,9 @@
                     </ul>
                 </div>
                 <div class="d-flex align-items-center justify-content-end flex-column flex-lg-row">
-                    <a href="https://jixo.io">
-                        <p class="small m-0 text-center text-lg-start">&copy; 2023 Furniture Emporium All Rights
-                            Reserved.
-                            F-EMPO
-                    </a></p>
+                    <p class="small m-0 text-center text-lg-start">&copy; 2023 Furniture Emporium
+                        <a href="https://rohithk.ml/">F-Emporium</a>
+                    </p>
                     <ul class="list-unstyled mb-0 ms-lg-4 mt-3 mt-lg-0 d-flex justify-content-end align-items-center">
                         <li class="bg-light p-2 d-flex align-items-center justify-content-center me-2">
                             <i class="pi pi-sm pi-paypal"></i>
@@ -858,6 +650,7 @@
             <h5 class="offcanvas-title" id="offcanvasFiltersLabel">Category Filters</h5>
             <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
         </div>
+        <!-- filter slide window -->
         <div class="offcanvas-body">
             <div class="d-flex flex-column justify-content-between w-100 h-100">
 
@@ -872,16 +665,16 @@
                             Price
                         </a>
                         <div id="filter-modal-price" class="collapse show">
-                            <div class="filter-price mt-6"></div>
+                            <!-- <div class="filter-price mt-6"></div> -->
                             <div class="d-flex justify-content-between align-items-center mt-7">
                                 <div class="input-group mb-0 me-2 border">
-                                    <span class="input-group-text bg-transparent fs-7 p-2 text-muted border-0">$</span>
-                                    <input type="number" min="00" max="1000" step="1"
+                                    <span class="input-group-text bg-transparent fs-7 p-2 text-muted border-0">₹</span>
+                                    <input id="minvalue" type="number" min="00" value="0" max="10000" step="1"
                                         class="filter-min form-control-sm border flex-grow-1 text-muted border-0">
                                 </div>
                                 <div class="input-group mb-0 ms-2 border">
-                                    <span class="input-group-text bg-transparent fs-7 p-2 text-muted border-0">$</span>
-                                    <input type="number" min="00" max="1000" step="1"
+                                    <span class="input-group-text bg-transparent fs-7 p-2 text-muted border-0">₹</span>
+                                    <input id="maxvalue" type="number" value="0" min="00" max="10000" step="1"
                                         class="filter-max form-control-sm flex-grow-1 text-muted border-0">
                                 </div>
                             </div>
@@ -894,7 +687,7 @@
                         <a class="small text-body text-decoration-none text-secondary-hover transition-all transition-all fs-6 fw-bolder d-block collapse-icon-chevron"
                             data-bs-toggle="collapse" href="#filter-modal-brands" role="button" aria-expanded="true"
                             aria-controls="filter-modal-brands">
-                            Brands
+                            Category
                         </a>
                         <div id="filter-modal-brands" class="collapse show">
                             <div class="input-group my-3 py-1">
@@ -904,190 +697,16 @@
                                     class="input-group-text bg-transparent p-2 position-absolute top-10 end-0 border-0 z-index-20"><i
                                         class="ri-search-2-line text-muted"></i></span>
                             </div>
-                            <div class="simplebar-wrapper">
-                                <div class="filter-options" data-pixr-simplebar>
-                                    <div class="form-group form-check-custom mb-1">
-                                        <input type="checkbox" class="form-check-input" id="filter-brands-modal-0">
-                                        <label
-                                            class="form-check-label fw-normal text-body flex-grow-1 d-flex align-items-center"
-                                            for="filter-brands-modal-0">Adidas <span
-                                                class="text-muted ms-1 fs-9">(21)</span></label>
-                                    </div>
-                                    <div class="form-group form-check-custom mb-1">
-                                        <input type="checkbox" class="form-check-input" id="filter-brands-modal-1">
-                                        <label
-                                            class="form-check-label fw-normal text-body flex-grow-1 d-flex align-items-center"
-                                            for="filter-brands-modal-1">Asics <span
-                                                class="text-muted ms-1 fs-9">(13)</span></label>
-                                    </div>
-                                    <div class="form-group form-check-custom mb-1">
-                                        <input type="checkbox" class="form-check-input" id="filter-brands-modal-2">
-                                        <label
-                                            class="form-check-label fw-normal text-body flex-grow-1 d-flex align-items-center"
-                                            for="filter-brands-modal-2">Canterbury <span
-                                                class="text-muted ms-1 fs-9">(18)</span></label>
-                                    </div>
-                                    <div class="form-group form-check-custom mb-1">
-                                        <input type="checkbox" class="form-check-input" id="filter-brands-modal-3">
-                                        <label
-                                            class="form-check-label fw-normal text-body flex-grow-1 d-flex align-items-center"
-                                            for="filter-brands-modal-3">Converse <span
-                                                class="text-muted ms-1 fs-9">(25)</span></label>
-                                    </div>
-                                    <div class="form-group form-check-custom mb-1">
-                                        <input type="checkbox" class="form-check-input" id="filter-brands-modal-4">
-                                        <label
-                                            class="form-check-label fw-normal text-body flex-grow-1 d-flex align-items-center"
-                                            for="filter-brands-modal-4">Donnay <span
-                                                class="text-muted ms-1 fs-9">(11)</span></label>
-                                    </div>
-                                    <div class="form-group form-check-custom mb-1">
-                                        <input type="checkbox" class="form-check-input" id="filter-brands-modal-5">
-                                        <label
-                                            class="form-check-label fw-normal text-body flex-grow-1 d-flex align-items-center"
-                                            for="filter-brands-modal-5">Nike <span
-                                                class="text-muted ms-1 fs-9">(19)</span></label>
-                                    </div>
-                                    <div class="form-group form-check-custom mb-1">
-                                        <input type="checkbox" class="form-check-input" id="filter-brands-modal-6">
-                                        <label
-                                            class="form-check-label fw-normal text-body flex-grow-1 d-flex align-items-center"
-                                            for="filter-brands-modal-6">Millet <span
-                                                class="text-muted ms-1 fs-9">(24)</span></label>
-                                    </div>
-                                    <div class="form-group form-check-custom mb-1">
-                                        <input type="checkbox" class="form-check-input" id="filter-brands-modal-7">
-                                        <label
-                                            class="form-check-label fw-normal text-body flex-grow-1 d-flex align-items-center"
-                                            for="filter-brands-modal-7">Puma <span
-                                                class="text-muted ms-1 fs-9">(11)</span></label>
-                                    </div>
-                                    <div class="form-group form-check-custom mb-1">
-                                        <input type="checkbox" class="form-check-input" id="filter-brands-modal-8">
-                                        <label
-                                            class="form-check-label fw-normal text-body flex-grow-1 d-flex align-items-center"
-                                            for="filter-brands-modal-8">Reebok <span
-                                                class="text-muted ms-1 fs-9">(19)</span></label>
-                                    </div>
-                                    <div class="form-group form-check-custom mb-1">
-                                        <input type="checkbox" class="form-check-input" id="filter-brands-modal-9">
-                                        <label
-                                            class="form-check-label fw-normal text-body flex-grow-1 d-flex align-items-center"
-                                            for="filter-brands-modal-9">Under Armour <span
-                                                class="text-muted ms-1 fs-9">(24)</span></label>
-                                    </div>
+                            <div class="simplebar-wrapper" style="overflow-y: scroll;">
+                                <div id="categorylist" class="filter-options" data-pixr-simplebar>
+
                                 </div>
                             </div>
                         </div>
                     </div>
                     <!-- / Brands Filter -->
 
-                    <!-- Sizes Filter -->
-                    <div class="py-4 widget-filter border-top">
-                        <a class="small text-body text-decoration-none text-secondary-hover transition-all transition-all fs-6 fw-bolder d-block collapse-icon-chevron"
-                            data-bs-toggle="collapse" href="#filter-modal-sizes" role="button" aria-expanded="true"
-                            aria-controls="filter-modal-sizes">
-                            Sizes
-                        </a>
-                        <div id="filter-modal-sizes" class="collapse show">
-                            <div class="filter-options mt-3">
-                                <div class="form-group d-inline-block mr-2 mb-2 form-check-bg form-check-custom">
-                                    <input type="checkbox" class="form-check-bg-input" id="filter-sizes-modal-0">
-                                    <label class="form-check-label fw-normal" for="filter-sizes-modal-0">6.5</label>
-                                </div>
-                                <div class="form-group d-inline-block mr-2 mb-2 form-check-bg form-check-custom">
-                                    <input type="checkbox" class="form-check-bg-input" id="filter-sizes-modal-1">
-                                    <label class="form-check-label fw-normal" for="filter-sizes-modal-1">7</label>
-                                </div>
-                                <div class="form-group d-inline-block mr-2 mb-2 form-check-bg form-check-custom">
-                                    <input type="checkbox" class="form-check-bg-input" id="filter-sizes-modal-2">
-                                    <label class="form-check-label fw-normal" for="filter-sizes-modal-2">7.5</label>
-                                </div>
-                                <div class="form-group d-inline-block mr-2 mb-2 form-check-bg form-check-custom">
-                                    <input type="checkbox" class="form-check-bg-input" id="filter-sizes-modal-3">
-                                    <label class="form-check-label fw-normal" for="filter-sizes-modal-3">8</label>
-                                </div>
-                                <div class="form-group d-inline-block mr-2 mb-2 form-check-bg form-check-custom">
-                                    <input type="checkbox" class="form-check-bg-input" id="filter-sizes-modal-4">
-                                    <label class="form-check-label fw-normal" for="filter-sizes-modal-4">8.5</label>
-                                </div>
-                                <div class="form-group d-inline-block mr-2 mb-2 form-check-bg form-check-custom">
-                                    <input type="checkbox" class="form-check-bg-input" id="filter-sizes-modal-5">
-                                    <label class="form-check-label fw-normal" for="filter-sizes-modal-5">9</label>
-                                </div>
-                                <div class="form-group d-inline-block mr-2 mb-2 form-check-bg form-check-custom">
-                                    <input type="checkbox" class="form-check-bg-input" id="filter-sizes-modal-6">
-                                    <label class="form-check-label fw-normal" for="filter-sizes-modal-6">9.5</label>
-                                </div>
-                                <div class="form-group d-inline-block mr-2 mb-2 form-check-bg form-check-custom">
-                                    <input type="checkbox" class="form-check-bg-input" id="filter-sizes-modal-7">
-                                    <label class="form-check-label fw-normal" for="filter-sizes-modal-7">10</label>
-                                </div>
-                                <div class="form-group d-inline-block mr-2 mb-2 form-check-bg form-check-custom">
-                                    <input type="checkbox" class="form-check-bg-input" id="filter-sizes-modal-8">
-                                    <label class="form-check-label fw-normal" for="filter-sizes-modal-8">10.5</label>
-                                </div>
-                                <div class="form-group d-inline-block mr-2 mb-2 form-check-bg form-check-custom">
-                                    <input type="checkbox" class="form-check-bg-input" id="filter-sizes-modal-9">
-                                    <label class="form-check-label fw-normal" for="filter-sizes-modal-9">11</label>
-                                </div>
-                                <div class="form-group d-inline-block mr-2 mb-2 form-check-bg form-check-custom">
-                                    <input type="checkbox" class="form-check-bg-input" id="filter-sizes-modal-10">
-                                    <label class="form-check-label fw-normal" for="filter-sizes-modal-10">11.5</label>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- / Sizes Filter -->
 
-                    <!-- Colour Filter -->
-                    <div class="py-4 widget-filter border-top">
-                        <a class="small text-body text-decoration-none text-secondary-hover transition-all transition-all fs-6 fw-bolder d-block collapse-icon-chevron"
-                            data-bs-toggle="collapse" href="#filter-modal-colour" role="button" aria-expanded="true"
-                            aria-controls="filter-modal-colour">
-                            Colour
-                        </a>
-                        <div id="filter-modal-colour" class="collapse show">
-                            <div class="filter-options mt-3">
-                                <div
-                                    class="form-group d-inline-block mr-1 mb-1 form-check-solid-bg-checkmark form-check-custom form-check-primary">
-                                    <input type="checkbox" class="form-check-color-input" id="filter-colours-modal-0">
-                                    <label class="form-check-label" for="filter-colours-modal-0"></label>
-                                </div>
-                                <div
-                                    class="form-group d-inline-block mr-1 mb-1 form-check-solid-bg-checkmark form-check-custom form-check-success">
-                                    <input type="checkbox" class="form-check-color-input" id="filter-colours-modal-1">
-                                    <label class="form-check-label" for="filter-colours-modal-1"></label>
-                                </div>
-                                <div
-                                    class="form-group d-inline-block mr-1 mb-1 form-check-solid-bg-checkmark form-check-custom form-check-danger">
-                                    <input type="checkbox" class="form-check-color-input" id="filter-colours-modal-2">
-                                    <label class="form-check-label" for="filter-colours-modal-2"></label>
-                                </div>
-                                <div
-                                    class="form-group d-inline-block mr-1 mb-1 form-check-solid-bg-checkmark form-check-custom form-check-info">
-                                    <input type="checkbox" class="form-check-color-input" id="filter-colours-modal-3">
-                                    <label class="form-check-label" for="filter-colours-modal-3"></label>
-                                </div>
-                                <div
-                                    class="form-group d-inline-block mr-1 mb-1 form-check-solid-bg-checkmark form-check-custom form-check-warning">
-                                    <input type="checkbox" class="form-check-color-input" id="filter-colours-modal-4">
-                                    <label class="form-check-label" for="filter-colours-modal-4"></label>
-                                </div>
-                                <div
-                                    class="form-group d-inline-block mr-1 mb-1 form-check-solid-bg-checkmark form-check-custom form-check-dark">
-                                    <input type="checkbox" class="form-check-color-input" id="filter-colours-modal-5">
-                                    <label class="form-check-label" for="filter-colours-modal-5"></label>
-                                </div>
-                                <div
-                                    class="form-group d-inline-block mr-1 mb-1 form-check-solid-bg-checkmark form-check-custom form-check-secondary">
-                                    <input type="checkbox" class="form-check-color-input" id="filter-colours-modal-6">
-                                    <label class="form-check-label" for="filter-colours-modal-6"></label>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- / Colour Filter -->
                 </div>
                 <!-- / Filters-->
 
@@ -1100,14 +719,10 @@
             </div>
         </div>
     </div>
-    <!-- Theme JS -->
-    <!-- Vendor JS -->
-    <script src="./assets/js/vendor.bundle.js"></script>
-
-    <!-- Theme JS -->
-    <script src="./assets/js/theme.bundle.js"></script>
 
     <script>
+
+        // -----------------------------------------------------
         // authentication code
         const userspan = document.getElementById("username");
         const logoutlist = document.getElementById("logout");
@@ -1136,38 +751,242 @@
             localStorage.clear();
             window.location.reload()
         }
-        // -------------------------------------------------------------------------
-        showCategories()
-        showcategories(categoryCode)
-        let categories = [];
-        async function showcategories(categoryCode) {
-            try {
-                const response = await fetch(`http://localhost:5001/category?code=${categoryCode}`);
-                if (!response.ok) {
-                    throw new Error('Network response was not ok');
-                }
-                const data = await response.json();
-                const categories = data.data;
+        // -----------------------------------------------------
+        showProducts()
+        let products = [];
+        function showProducts() {
+            fetch('http://localhost:5001/product/productsAll')
+                .then(response => response.json())
+                .then(data => {
+                    const product = data.data
+                    products = product
+                    setData(product)
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                });
 
-                // Assuming setCatData is a function that handles your category data
-                setCatData(categories);
-            } catch (error) {
-                console.error('Error:', error);
-            }
         }
-        function setData(categories) {
-            const categoryContainer = document.getElementById("productlisting");
-            categoryContainer.innerHTML = "";
-            categories.forEach(element => {
-                const categoryCard = document.createElement("div");
-                categoryCard.className = "col-12 col-sm-6 col-lg-4";
-                categoryCard.innerHTML = ``;
+        function setData(products) {
+            const productnContainer = document.getElementById("productlisting");
+            const pagination = document.getElementById("paginationData");
+            const allproducts = document.getElementById("productsCount");
+
+            // total count of images-----------------------------------
+            pagination.innerHTML = "Showing 1 - 9 of " + products.length;
+            // --------------------------------------------------------
+            allproducts.innerHTML = "All products : " + products.length;
+            // making product card dynamic ----------------------------
+            // Clear existing content in the banner container
+            productnContainer.innerHTML = "";
+            products.forEach(element => {
+                const productCard = document.createElement("div");
+                productCard.className = "col-12 col-sm-6 col-lg-4";
+                productCard.innerHTML = `<div class="card border border-transparent position-relative overflow-hidden h-100 transparent">
+                    <div class="card-img position-relative">
+                        <div class="card-badges">
+                            <span class="badge badge-card"><span
+                                class="f-w-2 f-h-2 bg-danger rounded-circle d-block me-1"></span>
+                                Sale</span>
+                        </div>
+                        <picture style="max-height:500px ; min-height:500px ; object-fit:cover; display : flex; flex-direction: row; align-items:center" class="position-relative overflow-hidden d-block bg-light">
+                            <img style="object-fit:contain mix-blend-mode:color-burn; aspect-ratio:9/20"class="w-100 img-fluid position-relative z-index-10" title=""
+                                src="${element.images}" alt="">
+                        </picture>
+                        <div class="position-absolute start-0 bottom-0 end-0 z-index-20 p-2">
+                            <button class="btn btn-quick-add"><i class="ri-add-line me-2"></i> View</button>
+                        </div>
+                    </div>
+                    <div class="card-body px-0">
+                        
+                        <a id="navigateToproduct" class="text-decoration-none link-cover" href="/dist/product.html?id=${element._id}">${element.name}</a>
+                        <small class="text-muted d-block"></small>
+                        <p class="mt-2 mb-0 small"><s class="text-muted">${element.price}</s> <span
+                            class="text-danger">${element.price - element.discount}</span></p>
+                    </div>
+                </div>`;
 
                 // Append the banner slide to the banner container
-                categoryContainer.appendChild(categoryCard);
+                productnContainer.appendChild(productCard);
             });
         }
+        // SEARCH-BOX
+
+        const params = new URLSearchParams(window.location.search);
+        const qsearch = params.get("search");
+
+        // Set the initial value of the search input
+        const searchInput = document.getElementById("productSearch");
+        searchInput.value = qsearch || '';
+
+        // Call searchProducts function initially
+        searchProducts();
+        async function searchProducts() {
+            event.preventDefault();
+            const search = searchInput.value;
+
+            try {
+                const response = await fetch(`http://localhost:5001/product/productsAll?name=${search}`);
+                const data = await response.json();
+
+                setData(data.data)
+                console.log("Data:", data);
+            } catch (error) {
+                console.log("Error:", error);
+            }
+        }
+
+        // SORT
+        async function sorting() {
+            event.preventDefault();
+            const selectElement = document.getElementById('mySelect');
+            // const selectedValue = selectElement.value;
+            selectElement.addEventListener('change', async function () {
+                let selectedValue = selectElement.value;
+                let sorted;
+                if (selectedValue === "high") {
+                    sorted = "price=-1"
+                }
+                else if (selectedValue === "low") {
+                    sorted = "price=1"
+                }
+                else if (selectedValue === "a") {
+                    sorted = "namesort=1"
+                }
+                else {
+                    sorted = "namesort=-1"
+                }
+                console.log("sorted:", sorted, selectedValue);
+
+                try {
+                    const response = await fetch(`http://localhost:5001/product/productsAll?${sorted}`);
+                    const data = await response.json();
+
+                    setData(data.data)
+                    console.log("Data:", data);
+                } catch (error) {
+                    console.log("Error:", error);
+                }
+            });
+        }
+        // --------------------------------------------------------
+        // Set FILTER
+        showcategories()
+        async function showcategories() {
+            fetch('http://localhost:5001/category/categoryAll')
+                .then(response => response.json())
+                .then(data => {
+                    const categories = data.data
+                    console.log(data);
+                    setCatData(categories)
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                });
+
+        }
+        function setCatData(category) {
+            const categorylisting = document.getElementById("categorylist");
+            categorylisting.innerHTML = "";
+            category.forEach((element, index) => {
+                const categoryDiv = document.createElement("div")
+                categoryDiv.className = "form-group form-check-custom mb-1"
+                categoryDiv.innerHTML = `<input type="checkbox" class="form-check-input" value=${element.categoryName}  id="filter-brands-modal-${index}">
+        <label class="form-check-label fw-normal text-body flex-grow-1 d-flex align-items-center"
+        for="filter-brands-modal-${index}">${element.categoryName}<span class="text-muted ms-1 fs-9"></span></label>`
+
+                categoryDiv.addEventListener("change", () => {
+                    filterCat(element.categoryName)
+                })
+                categorylisting.appendChild(categoryDiv);
+            })
+
+        }
+
+        // FILTER
+        let selectedValue = []
+
+        async function filterCat(clickedValue) {
+            const value = clickedValue;
+
+            if (selectedValue.includes(value)) {
+                showProducts()
+                let temp = selectedValue;
+                let updated = temp.filter((item) => item !== value)
+                selectedValue = updated
+                console.log("update", updated, temp)
+                return;
+            }
+
+            selectedValue.push(value)
+
+
+
+
+            const stringifySelected = encodeURIComponent(JSON.stringify(selectedValue))
+            console.log("value", value, selectedValue)
+            try {
+                const response = await fetch(`http://localhost:5001/product/productsAll?cat=${stringifySelected}`);
+                const data = await response.json();
+
+                setData(data.data)
+                console.log("Data:", data);
+            } catch (error) {
+                console.log("Error:", error);
+            }
+
+
+        }
+
+        const minPrice = document.getElementById("minvalue");
+        // const minPriceValue = document.getElementById("minvalue").value;
+        let minPriceValue = 0
+        const maxPrice = document.getElementById("maxvalue");//changed here
+        // const maxPriceValue = document.getElementById("maxvalue").value;
+        let maxPriceValue = 0
+
+        console.log("minValue", minPriceValue)
+
+        minPrice.addEventListener("change", (e) => {
+            const value = e.target.value;
+            console.log("price", value)
+            minPriceValue = value
+            filterPrice({ min: value })
+        })
+        maxPrice.addEventListener("change", (e) => {
+            const value = e.target.value;
+            console.log("price", value)
+            maxPriceValue = value
+            filterPrice({ max: value })
+        })
+
+
+        async function filterPrice(price) {
+            let value;
+            if (price.min) {
+                value = `minvalue=${price.min}&maxvalue=${maxPriceValue}`
+            } else {
+                value = `maxvalue=${price.max}&minvalue=${minPriceValue}`
+            }
+            try {
+                const response = await fetch(`http://localhost:5001/product/productsAll?${value}`);
+                const data = await response.json();
+
+                setData(data.data)
+                console.log("Data:", data);
+            } catch (error) {
+                console.log("Error:", error);
+            }
+        }
+
+
     </script>
+    <!-- Theme JS -->
+    <!-- Vendor JS -->
+    <script src="./assets/js/vendor.bundle.js"></script>
+
+    <!-- Theme JS -->
+    <script src="./assets/js/theme.bundle.js"></script>
 </body>
 
 </html>

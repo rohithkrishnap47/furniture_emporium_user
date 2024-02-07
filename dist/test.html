@@ -1,104 +1,103 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <meta name="description" content="Furniture Emporium">
+    <meta name="author" content="Your Name">
+    <title>Furniture Emporium</title>
+    <!-- Custom Google Fonts-->
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;600&family=Roboto:wght@300;400;700&display=auto" rel="stylesheet">
+    <!-- Favicon -->
+    <link rel="apple-touch-icon" sizes="180x180" href="./assets/images/favicon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="./assets/images/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="./assets/images/favicon/favicon-16x16.png">
+    <link rel="mask-icon" href="./assets/images/favicon/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="theme-color" content="#ffffff">
+    <!-- Vendor CSS -->
+    <link rel="stylesheet" href="./assets/css/libs.bundle.css" />
+    <!-- Main CSS -->
+    <link rel="stylesheet" href="./assets/css/theme.bundle.css" />
+    <!-- Your custom styles -->
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+        }
+
+        .accordion-item {
+            border: 1px solid #ddd;
+            padding: 20px;
+            border-radius: 8px;
+            position: relative;
+            margin-bottom: 20px;
+        }
+
+        .accordion-item h3 {
+            margin-bottom: 10px;
+            color: #333;
+        }
+
+        .accordion-item p {
+            color: #666;
+            margin-bottom: 20px;
+        }
+
+        .accordion-item button {
+            position: absolute;
+            bottom: 10px;
+            right: 10px;
+            padding: 8px 16px;
+            background-color: #28a745;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .accordion-item button:hover {
+            background-color: #218838;
+        }
+    </style>
 </head>
 
-<!-- <body>
-    <div class="col-2 position-relative">
-        <picture class="d-block border">
-            <img class="img-fluid" src="${element.images[0]}" alt="F-Empo">
-        </picture>
-        <!DOCTYPE html>
-        <html lang="en">
-
-        <head>
-            <meta charset="UTF-8">
-            <meta name="viewport" content="width=device-width, initial-scale=1.0">
-            <meta http-equiv="X-UA-Compatible" content="ie=edge">
-            <script src="https://cdn.tailwindcss.com"></script>
-            <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
-            <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.5.1/chart.min.js"></script>
-            <style>
-                summary {
-                    list-style: none;
-                    /* You can add more custom styling for the summary tag here */
-                }
-            </style>
-        </head>
-
-        <body>
-
-            <details>
-                <summary>Show Additional Information</summary>
-                <p>This is the additional content that can be toggled.</p>
-                <ul>
-                    <li>Item 1</li>
-                    <li>Item 2</li>
-                    <li>Item 3</li>
-                </ul>
-            </details>
-
-        </body>
-<<<<<<< HEAD
- -->
- <!-- <body>
+<body class="bg-light">
     <div class="container">
-        <div id="content">
-            <h3 style="color: red"
-                >Generate & Download PDF From Page Section Using JS</h3
-            >
-            <hr />
-            <p
-                >Click at buttons below to <mark>generate PDF</mark> and
-                <u>download it</u> using <i>only JavaScript</i>. We can
-                <strong>Generate PDF</strong> from whole page. We can target class or
-                ID and generate PDF from only a section in page -
-                <span style="color: blue">a part of page.</span></p
-            >
-            <img src="js.png" class="img-fluid d-block mx-auto" />
+        <h1>Welcome to Furniture Emporium</h1>
+        <div id="accordion">
+            <div class="accordion-item">
+                <h3>Living Room Furniture</h3>
+                <p>Find the perfect sofa, coffee table, and entertainment center for your living space.</p>
+                <button class="btn btn-primary" data-toggle="collapse" data-target="#livingRoomCollapse">View Products</button>
+                <div id="livingRoomCollapse" class="collapse">
+                    <p>Here you'll find a variety of comfortable sofas, elegant coffee tables, and stylish entertainment centers to elevate your living room decor.</p>
+                    <!-- You can add more details and product listings here -->
+                </div>
+            </div>
+            <div class="accordion-item">
+                <h3>Bedroom Furniture</h3>
+                <p>Create a relaxing and comfortable atmosphere with our bedroom furniture sets.</p>
+                <button class="btn btn-primary" data-toggle="collapse" data-target="#bedroomCollapse">View Products</button>
+                <div id="bedroomCollapse" class="collapse">
+                    <p>Explore our collection of cozy beds, spacious dressers, and functional nightstands to transform your bedroom into a peaceful sanctuary.</p>
+                    <!-- You can add more details and product listings here -->
+                </div>
+            </div>
+            <!-- Add more accordion items for other furniture categories -->
         </div>
-
-        <br />
-
-        <button id="btn-print" class="btn btn-success btn-lg"
-            >Print & Generate PDF</button
-        >
-
-        <button id="btn-one" class="btn btn-success btn-lg"
-            >Download PDF (With Styles & Images / Same Page)</button
-        >
-
-        <button id="btn-two" class="btn btn-success btn-lg"
-            >Generate PDF From iFrame</button
-        >
-
-        <iframe
-            id="frame"
-            style="width: 100%; border: 0; height: 0"
-            src="receipt.html"
-        ></iframe>
     </div>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <!-- Bootstrap JS and dependencies -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <!-- Your existing scripts or new scripts for wishlist functionality -->
+    <script>
+        // You can add your JavaScript functionality here if needed
+    </script>
+</body>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.4/jspdf.min.js"></script>
-
-    <script
-        src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"
-        integrity="sha512-BNaRQnYJYiPSqHHDb58B0yaPfCu+Wgds8Gp/gU33kqBtgNS4tSPHuGibyoeqMV/TJlSKda6FXzoEyYGjTe+vXA=="
-        crossorigin="anonymous"
-        referrerpolicy="no-referrer"
-    ></script>
-
-    <script src="custom.js"></script>
-</body> -->
-=======
-
-
->>>>>>> ea993996a9fc52fecdbc429824ef1b138e1cd558
-
-        </html>
+</html>

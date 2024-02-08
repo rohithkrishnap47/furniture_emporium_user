@@ -146,7 +146,8 @@
                                     <div class="row mx-0 py-4 g-0 border-bottom">
                                         <div class="col-2 position-relative">
                                             <picture class="d-block ">
-                                                <img class="img-fluid" src="./assets/images/categories/product-cart-1.jpg"
+                                                <img class="img-fluid"
+                                                    src="./assets/images/categories/product-cart-1.jpg"
                                                     alt="HTML Bootstrap Template by Pixel Rocket">
                                             </picture>
                                         </div>
@@ -166,7 +167,8 @@
                                     <div class="row mx-0 py-4 g-0 border-bottom">
                                         <div class="col-2 position-relative">
                                             <picture class="d-block ">
-                                                <img class="img-fluid" src="./assets/images/categories/product-cart-2.jpg"
+                                                <img class="img-fluid"
+                                                    src="./assets/images/categories/product-cart-2.jpg"
                                                     alt="HTML Bootstrap Template by Pixel Rocket">
                                             </picture>
                                         </div>
@@ -485,7 +487,7 @@
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" href="./all_products.html" role="button">
-                                    categories
+                                    Products
                                 </a>
                             </li>
                             <!-- <li class="nav-item dropdown">
@@ -1136,19 +1138,22 @@
         }
         // -------------------------------------------------------------------------
         showCategories()
+        showcategories(categoryCode)
         let categories = [];
-        function showCategories() {
-            fetch('http://localhost:5001/category/categoryAll')
-                .then(response => response.json())
-                .then(data => {
-                    const product = data.data
-                    categories = product
-                    setData(product)
-                })
-                .catch(error => {
-                    console.error('Error:', error);
-                });
+        async function showcategories(categoryCode) {
+            try {
+                const response = await fetch(`http://localhost:5001/category?code=${categoryCode}`);
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                const data = await response.json();
+                const categories = data.data;
 
+                // Assuming setCatData is a function that handles your category data
+                setCatData(categories);
+            } catch (error) {
+                console.error('Error:', error);
+            }
         }
         function setData(categories) {
             const categoryContainer = document.getElementById("productlisting");

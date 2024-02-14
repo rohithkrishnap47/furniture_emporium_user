@@ -198,42 +198,45 @@
                                     </th>
                                 </tr>
                             </thead>
-                            <tr class="bg-white border-b" id="orderdetails">
-                                <td scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">
-                                    Apple MacBook Pro 17"
-                                </td>
-                                <td class="px-6 py-4">
-                                    Silver
-                                </td>
-                                <td class="px-6 py-4">
-                                    Laptop
-                                </td>
-                                <td class="whitespace-nowrap px-4 py-4">
-                                    <span class="inline-flex rounded-full bg-green-600 px-2 text-xs font-semibold leading-5 text-white">
-                                        Delivered
-                                    </span>
-                                    <span
-                                        class="inline-flex rounded-full bg-yellow-100 px-2 text-xs font-semibold leading-5 text-green-800">
-                                        Pending
-                                    </span>
-                                    <span
-                                        class="inline-flex rounded-full bg-red-500 px-2 text-xs font-semibold leading-5 text-white">
-                                        Cancelled
-                                    </span>
-                                    <span
-                                        class="inline-flex rounded-full bg-green-100 px-2 text-xs font-semibold leading-5 text-green-800">
-                                        Processing
-                                    </span>
-                                </td>
-                                <td class="px-6 py-4 ">
-                                    <button id="cancelButton" onclick="confirmCancel()"
-                                        class="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
-                                        Cancel
-                                    </button>
+                            <tbody id="data-body"></tbody>
+                            <!-- <tbody>
+                                <tr class="bg-white border-b" id="orderdetails">
+                                    <td scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">
+                                        Apple MacBook Pro 17"
+                                    </td>
+                                    <td class="px-6 py-4">
+                                        Silver
+                                    </td>
+                                    <td class="px-6 py-4">
+                                        Laptop
+                                    </td>
+                                    <td class="whitespace-nowrap px-4 py-4">
+                                        <span
+                                            class="inline-flex rounded-full bg-green-600 px-2 text-xs font-semibold leading-5 text-white">
+                                            Delivered
+                                        </span>
+                                        <span
+                                            class="inline-flex rounded-full bg-yellow-100 px-2 text-xs font-semibold leading-5 text-green-800">
+                                            Pending
+                                        </span>
+                                        <span
+                                            class="inline-flex rounded-full bg-red-500 px-2 text-xs font-semibold leading-5 text-white">
+                                            Cancelled
+                                        </span>
+                                        <span
+                                            class="inline-flex rounded-full bg-green-100 px-2 text-xs font-semibold leading-5 text-green-800">
+                                            Processing
+                                        </span>
+                                    </td>
+                                    <td class="px-6 py-4 ">
+                                        <button id="cancelButton" onclick="confirmCancel()"
+                                            class="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
+                                            Cancel
+                                        </button>
 
-                                </td>
-                            </tr>
-                            </tbody>
+                                    </td>
+                                </tr>
+                            </tbody> -->
                         </table>
                     </div>
                     <!-- ORDERS LIST.2 -->
@@ -485,6 +488,100 @@
             // Hide the modal
             detailsModal.classList.add('hidden');
         });
+        // ---------------------------------------------------------
+        // ORDER LISTING 
+        var selectedProductid
+        var user = []
+        getOrders()
+        function getOrders() {
+            fetch('http://localhost:5001/user/show-orders')
+                .then(response => response.json())
+                .then(data => {
+                    user = data
+                    console.log(user);
+                    showOrders()
+                })
+                .catch(error => {
+                    console.error("the error is:", error);
+                });
+
+        }
+        function showOrders() {
+            const tbody = document.getElementById("data-body");
+            if (!tbody) {
+                console.error("Element with ID 'data-body' not found.");
+                return;
+            }
+
+            // Check if category array is properly populated
+            if (!Array.isArray(category) || category.length === 0) {
+                console.error("Category array is empty or not properly populated.");
+                return;
+            }
+
+            // Clear any existing content in the tbody
+            tbody.innerHTML = '';
+
+            category.forEach(item => {
+                const row = document.createElement("tr");
+                row.classList.add("bg-white", "border-b");
+
+                // Create <td> elements with specified attributes and content
+                const td1 = document.createElement("td");
+                td1.setAttribute("scope", "row");
+                td1.classList.add("px-6", "py-4", "font-medium", "text-gray-900", "whitespace-nowrap");
+                td1.textContent = item._id;
+
+                // You might want to access the product data properly here
+                // Depending on how your data is structured
+                // For example, if item.product is an array:
+                // const productName = item.product[0].name;
+
+                const td2 = document.createElement("td");
+                td2.classList.add("px-6", "py-4");
+                td2.textContent = "Silver"; // You should retrieve the appropriate data here
+
+                const td3 = document.createElement("td");
+                td3.classList.add("px-6", "py-4");
+                td3.textContent = "Laptop"; // You should retrieve the appropriate data here
+
+                const td4 = document.createElement("td");
+                td4.classList.add("whitespace-nowrap", "px-4", "py-4");
+
+                // Create <span> elements for the fourth <td>
+                // You should retrieve the appropriate delivery status here
+
+                const span1 = document.createElement("span");
+                span1.classList.add("inline-flex", "rounded-full", "bg-green-600", "px-2", "text-xs", "font-semibold", "leading-5", "text-white");
+                span1.textContent = "Delivered";
+
+                // Append appropriate spans based on delivery status
+
+                td4.appendChild(span1); // Append the span according to the delivery status
+
+                const td5 = document.createElement("td");
+                td5.classList.add("px-6", "py-4");
+
+                // Create <button> element for the fifth <td>
+                const button = document.createElement("button");
+                button.id = "cancelButton";
+                button.textContent = "Cancel";
+                button.classList.add("bg-red-500", "hover:bg-red-600", "text-white", "font-bold", "py-2", "px-4", "rounded", "focus:outline-none", "focus:shadow-outline");
+                button.onclick = confirmCancel; // Assuming confirmCancel is a defined function
+
+                td5.appendChild(button);
+
+                row.appendChild(td1);
+                row.appendChild(td2);
+                row.appendChild(td3);
+                row.appendChild(td4);
+                row.appendChild(td5);
+
+                // Append the row to the tbody
+                tbody.appendChild(row);
+            });
+        }
+
     </script>
 </body>
 

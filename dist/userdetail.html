@@ -140,24 +140,24 @@
                     <ul class="mt-2 text-gray-700">
                         <li class="flex border-y py-2">
                             <span class="font-bold w-24">First Name:</span>
-                            <span class="text-gray-700">Amanda S. Ross</span>
+                            <span id="userFirstname" class="text-gray-700">Amanda S. Ross</span>
                         </li>
                         <li class="flex border-b py-2">
                             <span class="font-bold w-24">Last Name:</span>
-                            <span class="text-gray-700">24 Jul, 1991</span>
+                            <span id="userLastname" class="text-gray-700">24 Jul, 1991</span>
                         </li>
                         <li class="flex border-b py-2">
                             <span class="font-bold w-24">Email:</span>
-                            <span class="text-gray-700">amandaross@example.com</span>
+                            <span id="userMail" class="text-gray-700">amandaross@example.com</span>
                         </li>
                         <li class="flex border-b py-2">
                             <span class="font-bold w-24">Mobile:</span>
-                            <span class="text-gray-700">(123) 123-1234</span>
+                            <span id="userMobile" class="text-gray-700">(123) 123-1234</span>
                         </li>
 
                         <li class="flex border-b py-2">
                             <span class="font-bold w-24">Joined:</span>
-                            <span class="text-gray-700">10 Jan 2022 (25 days ago)</span>
+                            <span id="joinedDate" class="text-gray-700">10 Jan 2022 (25 days ago)</span>
                         </li>
                     </ul>
                 </div>
@@ -444,6 +444,50 @@
         </section>
     </div>
     <script>
+        // SHOW-USER_DETAILS
+        const userFirstname = document.getElementById("userFirstname");
+        const userLastname = document.getElementById("userLastname");
+        const userMail = document.getElementById("userMail");
+        const userMobile = document.getElementById("userMobile");
+        const joined = document.getElementById("joinedDate");
+
+        // rearranging date as DD-MM-YYYY formatttttt
+        function formatDate(dateString) {
+            if (!dateString) return ''; // Return empty string if dateString is null or undefined
+            const dateParts = dateString.slice(0, 10).split('-'); // Split the date into parts
+            return `${dateParts[2]}-${dateParts[1]}-${dateParts[0]}`; // Rearrange the parts
+        }
+        // to get day count till date
+        function daysSince(dateString) {
+            if (!dateString) return '';
+            const joinedDate = new Date(dateString);
+            const currentDate = new Date();
+            const diffTime = Math.abs(currentDate - joinedDate);
+            const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+            return `${diffDays} days ago`;
+        }
+
+        checkAuthenticated()
+        function checkAuthenticated() {
+            const token = localStorage.getItem('token');
+            if (token) {
+                const userInfo = JSON.parse(localStorage.getItem("userInfo"));
+                userFirstname.textContent = `${userInfo?.firstname}`.toUpperCase();
+                userLastname.textContent = `${userInfo?.lastname}`.toUpperCase();
+                userMail.textContent = `${userInfo?.emailaddress}`;
+                userMobile.textContent = `${userInfo?.mobile}`;
+                joined.textContent = formatDate(userInfo?.joined) + ` (${daysSince(userInfo?.joined)})`;
+
+                console.log("userinfo=>", userInfo);
+            }
+            else {
+                logoutlist.style.display = "none"
+                loginList.style.display = "block"
+            }
+
+
+        }
+
         // ----------------------------------------------------------------
         // CANCEL-ORDER
         function confirmCancel() {

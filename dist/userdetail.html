@@ -78,54 +78,52 @@
                             class="fixed inset-0 z-50 flex justify-center items-center bg-black bg-opacity-50 hidden">
                             <div class="bg-white p-6 rounded-lg w-96">
                                 <h2 class="text-lg font-semibold text-gray-900 mb-4">Personal Details</h2>
-                                <ul class="text-gray-700">
-                                    <li class="flex  py-2">
-                                        <span class="font-bold w-24">First name:</span>
-                                        <input type="text" id="fullName"
-                                            class="text-gray-700 border border-gray-300 px-3 py-1 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500">
+                                <form id="userDetailsForm">
+                                    <ul class="text-gray-700">
+                                        <li class="flex  py-2">
+                                            <span class="font-bold w-24">First name:</span>
+                                            <input type="text" id="firstName" name="firstName"
+                                                class="text-gray-700 border border-gray-300 px-3 py-1 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500">
+                                        </li>
+                                        <li class="flex   py-2">
+                                            <span class="font-bold w-24">Last name:</span>
+                                            <input type="text" id="lastName" name="lastName"
+                                                class="text-gray-700 border border-gray-300 px-3 py-1 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500">
+                                        </li>
+                                        <li class="flex   py-2">
+                                            <span class="font-bold w-24">Email:</span>
+                                            <input type="text" id="emailAddress" name="emailAddress"
+                                                class="text-gray-700 border border-gray-300 px-3 py-1 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500">
+                                        </li>
+                                        <li class="flex   py-2">
+                                            <span class="font-bold w-24">Mobile:</span>
+                                            <input type="text" id="mobile" name="mobile"
+                                                class="text-gray-700 border border-gray-300 px-3 py-1 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500">
+                                        </li>
+                                    </ul>
+                                    <div class="flex justify-between mx-8">
+                                        <button id="closeModalButton"
+                                            class="mt-4 mr-2 text-sm text-red-300 hover:text-red-600 px-4 py-2 rounded-md border border-red-400 hover:border-red-600 focus:outline-none">
+                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                                stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                                                <path stroke-linecap="round" stroke-linejoin="round"
+                                                    d="M6 18 18 6M6 6l12 12" />
+                                            </svg>
+                                        </button>
 
-                                    </li>
-                                    <li class="flex   py-2">
-                                        <span class="font-bold w-24">Last name:</span>
-                                        <input type="text" id="fullName"
-                                            class="text-gray-700 border border-gray-300 px-3 py-1 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500">
-
-                                    </li>
-                                    <li class="flex   py-2">
-                                        <span class="font-bold w-24">Email:</span>
-                                        <input type="text" id="fullName"
-                                            class="text-gray-700 border border-gray-300 px-3 py-1 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500">
-
-                                    </li>
-                                    <li class="flex   py-2">
-                                        <span class="font-bold w-24">Mobile:</span>
-                                        <input type="text" id="fullName"
-                                            class="text-gray-700 border border-gray-300 px-3 py-1 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500">
-
-                                    </li>
-
-                                </ul>
-                                <div class="flex justify-between mx-8">
-                                    <button id="closeModalButton"
-                                        class="mt-4 mr-2 text-sm text-red-300 hover:text-red-600 px-4 py-2 rounded-md border border-red-400 hover:border-red-600 focus:outline-none">
-                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                            stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                                            <path stroke-linecap="round" stroke-linejoin="round"
-                                                d="M6 18 18 6M6 6l12 12" />
-                                        </svg>
-                                    </button>
-
-                                    <button id="okButton"
-                                        class="mt-4 text-sm text-green-400 hover:text-green-600 px-4 py-2 rounded-md border border-green-400 hover:border-green-600 focus:outline-none">
-                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                            stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                                            <path stroke-linecap="round" stroke-linejoin="round"
-                                                d="m4.5 12.75 6 6 9-13.5" />
-                                        </svg>
-                                    </button>
-                                </div>
+                                        <button type="submit" id="okButton"
+                                            class="mt-4 text-sm text-green-400 hover:text-green-600 px-4 py-2 rounded-md border border-green-400 hover:border-green-600 focus:outline-none">
+                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                                stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                                                <path stroke-linecap="round" stroke-linejoin="round"
+                                                    d="m4.5 12.75 6 6 9-13.5" />
+                                            </svg>
+                                        </button>
+                                    </div>
+                                </form>
                             </div>
                         </div>
+                        <!-- modal ends here -->
 
 
 
@@ -533,6 +531,52 @@
             detailsModal.classList.add('hidden');
         });
         // ---------------------------------------------------------
+        // Add event listener to the form submission
+        document.getElementById('userDetailsForm').addEventListener('submit', function (event) {
+            event.preventDefault();
+
+            updateUserData();
+        });
+
+        // UPDATE-USER
+        function updateUserData() {
+            // Get input field values
+            const firstName = document.getElementById('firstName').value;
+            const lastName = document.getElementById('lastName').value;
+            const emailAddress = document.getElementById('emailAddress').value;
+            const mobile = document.getElementById('mobile').value;
+
+            // Construct payload
+            const payload = {
+                firstname: firstName,
+                lastname: lastName,
+                emailaddress: emailAddress,
+                mobile: mobile
+            };
+
+            // Fetch method to send data to backend
+            fetch('http://localhost:5001/auth/updateuser', {
+                method: 'PUT', // Assuming you are using PUT method for updates
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(payload)
+            })
+                .then(response => {
+                    console.log('Response status:', response.status);
+                    return response.json();
+                })
+                .then(data => {
+                    console.log('Data updated successfully:', data);
+                    // Handle success response
+                })
+                .catch(error => {
+                    console.error('There was a problem with your fetch operation:', error);
+                    // Handle error
+                });
+        }
+
+        // ---------------------------------------------------------
         // ORDER LISTING 
         var selectedProductid
         var user = []
@@ -558,15 +602,15 @@
             }
 
             // Check if category array is properly populated
-            if (!Array.isArray(category) || category.length === 0) {
-                console.error("Category array is empty or not properly populated.");
-                return;
-            }
+            // if (!Array.isArray(category) || category.length === 0) {
+            //     console.error("Category array is empty or not properly populated.");
+            //     return;
+            // }
 
             // Clear any existing content in the tbody
             tbody.innerHTML = '';
 
-            category.forEach(item => {
+            user.forEach(item => {
                 const row = document.createElement("tr");
                 row.classList.add("bg-white", "border-b");
 
@@ -583,11 +627,11 @@
 
                 const td2 = document.createElement("td");
                 td2.classList.add("px-6", "py-4");
-                td2.textContent = "Silver"; // You should retrieve the appropriate data here
+                td2.textContent = item.orderedDate.slice(0, 10); // You should retrieve the appropriate data here
 
                 const td3 = document.createElement("td");
                 td3.classList.add("px-6", "py-4");
-                td3.textContent = "Laptop"; // You should retrieve the appropriate data here
+                td3.textContent = item.deliveredDate.slice(0, 10); // You should retrieve the appropriate data here
 
                 const td4 = document.createElement("td");
                 td4.classList.add("whitespace-nowrap", "px-4", "py-4");
@@ -597,7 +641,7 @@
 
                 const span1 = document.createElement("span");
                 span1.classList.add("inline-flex", "rounded-full", "bg-green-600", "px-2", "text-xs", "font-semibold", "leading-5", "text-white");
-                span1.textContent = "Delivered";
+                span1.textContent = item.deliveryStatus;
 
                 // Append appropriate spans based on delivery status
 

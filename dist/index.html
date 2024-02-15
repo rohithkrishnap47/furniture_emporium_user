@@ -1271,7 +1271,7 @@
             if (token) {
                 // json stingify to parse
                 const userInfo = JSON.parse(localStorage.getItem("userInfo"));
-                userspan.textContent = `Hello , ${userInfo?.firstname} 👋`;
+                userspan.textContent = `Hello, ${userInfo?.firstname ? userInfo.firstname.toUpperCase() : ''} 👋`;
                 logoutlist.style.display = "block"
                 loginList.style.display = "none"
                 console.log("userinfo=>", userInfo);

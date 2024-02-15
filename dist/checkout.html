@@ -727,7 +727,7 @@
                 <div class="form-check">
                     <input type="radio" class="form-check-input" name="addressSelection" id="address${element.id}" >
                     <label class="form-check-label" for="address${element.id}">
-                        ${element.firstname + " " + element.lastname}
+                        ${element.firstname.toUpperCase() + " " + element.lastname.toUpperCase() + "," }
                         
                     </label>
                 </div>
@@ -743,11 +743,11 @@
         // EDIT BUTTON LOGIC------------------------------------------------
         const editButton = addressCard.querySelector("#editButton");
         console.log("edit", editButton);
-        editButton.addEventListener("click",()=> editAddress(element._id));
+        editButton.addEventListener("click", () => editAddress(element._id));
         // DELETE BUTTON LOGIC----------------------------------------------
         const deleteButton = addressCard.querySelector("#deleteButton");
         console.log("edit", deleteButton);
-        deleteButton.addEventListener("click",()=> deleteAddress(element._id));
+        deleteButton.addEventListener("click", () => deleteAddress(element._id));
         // Append the address card to the container
         addressContainer.appendChild(addressCard);
         // Add event listener to the radio button

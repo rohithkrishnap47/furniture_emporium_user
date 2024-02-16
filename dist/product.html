@@ -1438,6 +1438,7 @@
         function getCartproducts(product) {
             if (!token) {
                 console.error('Authorization token not found');
+                
                 return;
             }
             fetch('http://localhost:5001/cart/showcart', {

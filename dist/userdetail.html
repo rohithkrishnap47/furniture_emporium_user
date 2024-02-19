@@ -442,6 +442,12 @@
         </section>
     </div>
     <script>
+        var token = localStorage.getItem('token');
+        var headers = {
+            'Authorization': `Bearer ${token}`,
+            'Content-Type': 'application/json'
+        };
+
         // SHOW-USER_DETAILS
         const userFirstname = document.getElementById("userFirstname");
         const userLastname = document.getElementById("userLastname");
@@ -582,7 +588,10 @@
         var user = []
         getOrders()
         function getOrders() {
-            fetch('http://localhost:5001/user/show-orders')
+            fetch('http://localhost:5001/user/user-orders', {
+                method: 'GET',
+                headers: headers,
+            })
                 .then(response => response.json())
                 .then(data => {
                     user = data
@@ -618,12 +627,7 @@
                 const td1 = document.createElement("td");
                 td1.setAttribute("scope", "row");
                 td1.classList.add("px-6", "py-4", "font-medium", "text-gray-900", "whitespace-nowrap");
-                td1.textContent = item._id;
-
-                // You might want to access the product data properly here
-                // Depending on how your data is structured
-                // For example, if item.product is an array:
-                // const productName = item.product[0].name;
+                td1.textContent = item.orderId;
 
                 const td2 = document.createElement("td");
                 td2.classList.add("px-6", "py-4");

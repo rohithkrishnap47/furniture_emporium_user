@@ -31,6 +31,15 @@
   <!-- Main CSS -->
   <link rel="stylesheet" href="./assets/css/theme.bundle.css" />
 
+  <!-- Include Toastify CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css" rel="stylesheet">
+
+  <!-- Include Toastify JavaScript -->
+  <script src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+
+  <!-- <script src="path/to/toastify.js"></script> -->
+
+
   <!-- Fix for custom scrollbar if JS is disabled-->
   <noscript>
     <style>
@@ -91,7 +100,8 @@
           <div class="form-group">
             <label for="login-password" class="form-label d-flex justify-content-between align-items-center">
               <!-- Password -->
-              <a href="./forgotten-password.html" class="text-muted small " onclick="forgotPassword()">Forgot your password?</a>
+              <a href="./forgotten-password.html" class="text-muted small " onclick="forgotPassword()">Forgot your
+                password?</a>
             </label>
             <!-- ... (password input field) ... -->
           </div>
@@ -121,15 +131,14 @@
 
     async function logindata() {
       try {
-        event.preventDefault()
-        const registerEmail = document.getElementById("login-email").value
-        const registerPassword = document.getElementById("login-password").value
+        event.preventDefault();
+        const registerEmail = document.getElementById("login-email").value;
+        const registerPassword = document.getElementById("login-password").value;
 
         const data = {
           emailaddress: registerEmail,
           password: registerPassword
-        }
-        console.log("messaaaaa", data);
+        };
 
         const response = await fetch("http://localhost:5001/auth/login", {
           method: "POST",
@@ -138,22 +147,27 @@
           },
           body: JSON.stringify(data),
           credentials: "include",
-        })
-        const datas = await response.json()
-        console.log("hey", datas);
+        });
+
+        const datas = await response.json();
 
         if (datas.statusCode === 200) {
           const token = datas.token;
-          const userInfo = JSON.stringify(datas.userInfo)
+          const userInfo = JSON.stringify(datas.userInfo);
           localStorage.setItem("token", token);
           localStorage.setItem("userInfo", userInfo);
-          window.location.href = "/dist/index.html"
+          window.location.href = "/dist/index.html";
+        } else {
+          Toastify({
+            text: "PASSWORD IS INCORRECT",
+            backgroundColor: "red"
+          }).showToast();
         }
       } catch (error) {
         console.log(error);
       }
-
     }
+
   </script>
 </body>
 

@@ -19,6 +19,21 @@
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 
     <title>Furnitue Emporium | User </title>
+    <style>
+        .login-button {
+            background-color: #007bff;
+            color: #fff;
+            padding: 8px 16px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-top: 20px;
+        }
+
+        .login-button:hover {
+            background-color: #0056b3;
+        }
+    </style>
 </head>
 
 <body>
@@ -135,31 +150,34 @@
                     </div>
 
 
-                    <ul class="mt-2 text-gray-700">
-                        <li class="flex border-y py-2">
-                            <span class="font-bold w-24">First Name:</span>
-                            <span id="userFirstname" class="text-gray-700">Amanda S. Ross</span>
-                        </li>
-                        <li class="flex border-b py-2">
-                            <span class="font-bold w-24">Last Name:</span>
-                            <span id="userLastname" class="text-gray-700">24 Jul, 1991</span>
-                        </li>
-                        <li class="flex border-b py-2">
-                            <span class="font-bold w-24">Email:</span>
-                            <span id="userMail" class="text-gray-700">amandaross@example.com</span>
-                        </li>
-                        <li class="flex border-b py-2">
-                            <span class="font-bold w-24">Mobile:</span>
-                            <span id="userMobile" class="text-gray-700">(123) 123-1234</span>
-                        </li>
+                    <div id="userProfileContainer">
+                        <ul class="mt-2 text-gray-700">
+                            <li class="flex border-y py-2">
+                                <span class="font-bold w-24">First Name:</span>
+                                <span id="userFirstname" class="text-gray-700"></span>
+                            </li>
+                            <li class="flex border-b py-2">
+                                <span class="font-bold w-24">Last Name:</span>
+                                <span id="userLastname" class="text-gray-700"></span>
+                            </li>
+                            <li class="flex border-b py-2">
+                                <span class="font-bold w-24">Email:</span>
+                                <span id="userMail" class="text-gray-700"></span>
+                            </li>
+                            <li class="flex border-b py-2">
+                                <span class="font-bold w-24">Mobile:</span>
+                                <span id="userMobile" class="text-gray-700"></span>
+                            </li>
+                            <li class="flex border-b py-2">
+                                <span class="font-bold w-24">Joined:</span>
+                                <span id="joinedDate" class="text-gray-700"></span>
+                            </li>
+                        </ul>
+                    </div>
 
-                        <li class="flex border-b py-2">
-                            <span class="font-bold w-24">Joined:</span>
-                            <span id="joinedDate" class="text-gray-700">10 Jan 2022 (25 days ago)</span>
-                        </li>
-                    </ul>
                 </div>
             </div>
+
 
             <div class="flex flex-col w-full 2xl:w-2/3">
                 <div class="flex-1 bg-white rounded-lg shadow-xl mt-10 p-8">
@@ -197,6 +215,7 @@
                                 </tr>
                             </thead>
                             <tbody id="data-body"></tbody>
+                            <div id="lottie-container"></div>
                             <!-- <tbody>
                                 <tr class="bg-white border-b" id="orderdetails">
                                     <td scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">
@@ -474,23 +493,29 @@
         checkAuthenticated()
         function checkAuthenticated() {
             const token = localStorage.getItem('token');
+            const userProfileContainer = document.getElementById('userProfileContainer');
+
             if (token) {
                 const userInfo = JSON.parse(localStorage.getItem("userInfo"));
-                userFirstname.textContent = `${userInfo?.firstname}`.toUpperCase();
-                userLastname.textContent = `${userInfo?.lastname}`.toUpperCase();
-                userMail.textContent = `${userInfo?.emailaddress}`;
-                userMobile.textContent = `${userInfo?.mobile}`;
-                joined.textContent = formatDate(userInfo?.joined) + ` (${daysSince(userInfo?.joined)})`;
+                document.getElementById('userFirstname').textContent = `${userInfo?.firstname}`.toUpperCase();
+                document.getElementById('userLastname').textContent = `${userInfo?.lastname}`.toUpperCase();
+                document.getElementById('userMail').textContent = `${userInfo?.emailaddress}`;
+                document.getElementById('userMobile').textContent = `${userInfo?.mobile}`;
+                document.getElementById('joinedDate').textContent = formatDate(userInfo?.joined) + ` (${daysSince(userInfo?.joined)})`;
+            } else {
+                // Token not found, show login button
+                const loginButton = document.createElement('button');
+                loginButton.textContent = 'Login';
+                loginButton.classList.add('login-button'); // Add the class 'login-button' to the button
 
-                console.log("userinfo=>", userInfo);
+                loginButton.addEventListener('click', () => {
+                    window.location.href = 'http://127.0.0.1:5508/dist/login.html';
+                });
+
+                userProfileContainer.appendChild(loginButton);
             }
-            else {
-                logoutlist.style.display = "none"
-                loginList.style.display = "block"
-            }
-
-
         }
+
 
         // ----------------------------------------------------------------
         // CANCEL-ORDER
@@ -601,23 +626,31 @@
                 .catch(error => {
                     console.error("the error is:", error);
                 });
-
         }
+
         function showOrders() {
             const tbody = document.getElementById("data-body");
-            if (!tbody) {
-                console.error("Element with ID 'data-body' not found.");
+            const lottieContainer = document.getElementById("lottie-container");
+
+            if (!tbody || !lottieContainer) {
+                console.error("Element with ID 'data-body' or 'lottie-container' not found.");
                 return;
             }
 
-            // Check if category array is properly populated
-            // if (!Array.isArray(category) || category.length === 0) {
-            //     console.error("Category array is empty or not properly populated.");
-            //     return;
-            // }
-
-            // Clear any existing content in the tbody
             tbody.innerHTML = '';
+
+            if (user.length === 0) {
+                const animation = bodymovin.loadAnimation({
+                    container: lottieContainer,
+                    renderer: 'svg',
+                    loop: true,
+                    autoplay: true,
+                    path: 'https://app.lottiefiles.com/animation/3cef1a1a-f291-4d0a-9246-9359a3fa4b8f' 
+                });
+                lottieContainer.style.display = 'block'; // Display the Lottie container
+                return;
+            }
+
 
             user.forEach(item => {
                 const row = document.createElement("tr");

@@ -20,6 +20,14 @@
 
     <title>Furnitue Emporium | User </title>
     <style>
+        @media screen and (max-width: 640px) {
+
+            .footer .p-8:not(:first-child),
+            .footer ul {
+                display: none;
+            }
+        }
+
         .login-button {
             background-color: #007bff;
             color: #fff;
@@ -47,8 +55,10 @@
             box-shadow: 0 -2px 4px rgba(0, 0, 0, 0.1);
             /* Optional: add a shadow */
         }
+
         .content {
-            min-height: calc(100vh - 100px); /* Calculate the height of the viewport minus the height of the footer */
+            min-height: calc(100vh - 100px);
+            /* Calculate the height of the viewport minus the height of the footer */
             /* Adjust as needed based on your footer's height */
             padding: 8px;
             box-sizing: border-box;
@@ -399,7 +409,7 @@
 
         </div>
         <!-- footer -->
-        <footer class="footer">
+        <footer class="footer" style="padding: 10px 0;">
             <section class="relative overflow-hidden bg-white py-8">
                 <div class="container relative z-10 mx-auto px-4">
                     <div class="-m-8 flex flex-wrap items-center justify-between">

@@ -454,7 +454,7 @@
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" href="./contact-us.html" role="button">
-                                    CONTACT US
+                                    ABOUT US
                                 </a>
                             </li>
                             <li class="nav-item">
@@ -755,7 +755,7 @@
         showProducts()
         let products = [];
         function showProducts() {
-            fetch('http://localhost:5001/product/productsAll')
+            fetch('http://localhost:5001/category/categoryAll')
                 .then(response => response.json())
                 .then(data => {
                     const product = data.data
@@ -787,7 +787,7 @@
                         </div>
                         <picture style="position-relative overflow-hidden d-block bg-light">
                             <img style="w-100 img-fluid position-relative z-index-10"class="w-100 img-fluid position-relative z-index-10" title=""
-                                src="${element.images}" alt="">
+                                src="${element.categoryImages}" alt="">
                         </picture>
                         <div class="position-absolute start-0 bottom-0 end-0 z-index-20 p-2">
                             <button class="btn btn-quick-add"><i class="ri-add-line me-2"></i> View</button>

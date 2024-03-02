@@ -600,46 +600,97 @@
         document.getElementById('userDetailsForm').addEventListener('submit', function (event) {
             event.preventDefault();
 
-            updateUserData();
+            // updateUserData();
+            updateUserDetails();
         });
 
         // UPDATE-USER
-        function updateUserData() {
-            // Get input field values
-            const firstName = document.getElementById('firstName').value;
-            const lastName = document.getElementById('lastName').value;
-            const emailAddress = document.getElementById('emailAddress').value;
-            const mobile = document.getElementById('mobile').value;
+        // function updateUserData() {
+        //     // Get input field values
+        //     const firstName = document.getElementById('firstName').value;
+        //     const lastName = document.getElementById('lastName').value;
+        //     const emailAddress = document.getElementById('emailAddress').value;
+        //     const mobile = document.getElementById('mobile').value;
 
-            // Construct payload
-            const payload = {
-                firstname: firstName,
-                lastname: lastName,
-                emailaddress: emailAddress,
-                mobile: mobile
-            };
+        //     // Construct payload
+        //     const payload = {
+        //         firstname: firstName,
+        //         lastname: lastName,
+        //         emailaddress: emailAddress,
+        //         mobile: mobile
+        //     };
 
-            // Fetch method to send data to backend
-            fetch('http://localhost:5001/auth/updateuser', {
-                method: 'PUT', // Assuming you are using PUT method for updates
+        //     // Fetch method to send data to backend
+        //     fetch('http://localhost:5001/auth/updateuser/', {
+        //         method: 'PUT', // Assuming you are using PUT method for updates
+        //         headers: {
+        //             'Content-Type': 'application/json'
+        //         },
+        //         body: JSON.stringify(payload)
+        //     })
+        //         .then(response => {
+        //             console.log('Response status:', response.status);
+        //             return response.json();
+        //         })
+        //         .then(data => {
+        //             console.log('Data updated successfully:', data);
+        //             // Handle success response
+        //         })
+        //         .catch(error => {
+        //             console.error('There was a problem with your fetch operation:', error);
+        //             // Handle error
+        //         });
+        // }
+        function updateUserDetails(token, payload) {
+            // Fetch user details from the server
+            fetch('http://localhost:5001/auth/getuserbyid', {
+                method: 'GET',
                 headers: {
+                    'Authorization': `Bearer ${token}`,
                     'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(payload)
+                }
             })
                 .then(response => {
-                    console.log('Response status:', response.status);
+                    if (!response.ok) {
+                        throw new Error('Failed to fetch user details');
+                    }
                     return response.json();
                 })
-                .then(data => {
-                    console.log('Data updated successfully:', data);
-                    // Handle success response
+                .then(userDetails => {
+                    // Extract the user ObjectId
+                    const userId = userDetails._id;
+
+                    // Construct the URL for the update request
+                    const updateUserURL = `http://localhost:5001/auth/updateuser/${userId}`;
+
+                    // Now you can perform the update request with the user's ObjectId
+                    fetch(updateUserURL, {
+                        method: 'PUT',
+                        headers: {
+                            'Authorization': `Bearer ${token}`,
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify(payload)
+                    })
+                        .then(response => {
+                            console.log('Response status:', response.status);
+                            return response.json();
+                        })
+                        .then(data => {
+                            console.log('Data updated successfully:', data);
+                            // Handle success response
+                        })
+                        .catch(error => {
+                            console.error('There was a problem with your fetch operation:', error);
+                            // Handle error
+                        });
                 })
                 .catch(error => {
-                    console.error('There was a problem with your fetch operation:', error);
+                    console.error('There was a problem fetching user details:', error);
                     // Handle error
                 });
         }
+
 
         // ---------------------------------------------------------
         // ORDER LISTING 

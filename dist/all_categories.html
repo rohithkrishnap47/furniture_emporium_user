@@ -443,7 +443,12 @@
                                 <!-- / Menswear dropdown menu-->
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="./category.html" role="button">
+                                <a class="nav-link" href="./locate_us.html" role="button">
+                                    LOCATE US
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="./all_categories.html" role="button">
                                     Categories
                                 </a>
                             </li>
@@ -771,8 +776,8 @@
             const productnContainer = document.getElementById("productlisting");
             const pagination = document.getElementById("paginationData");
             const allproducts = document.getElementById("productsCount");
-            
-            allproducts.innerHTML = "All products : " + products.length;
+
+            allproducts.innerHTML = "Categories : " + products.length;
 
             productnContainer.innerHTML = "";
             products.forEach(element => {
@@ -795,10 +800,9 @@
                     </div>
                     <div class="card-body px-0">
                         
-                        <a id="navigateToproduct" class="text-decoration-none link-cover" href="/dist/product.html?id=${element._id}">${element.name}</a>
+                        <a id="navigateToproduct" class="text-decoration-none link-cover" href="/dist/all_products.html?cat=${encodeURIComponent(element.categoryName)}">${element.categoryName}</a>
                         <small class="text-muted d-block"></small>
-                        <p class="mt-2 mb-0 small"><s class="text-muted">${element.price}</s> <span
-                            class="text-danger">${element.price - element.discount}</span></p>
+                        
                     </div>
                 </div>`;
 

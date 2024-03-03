@@ -43,7 +43,7 @@
         }
 
         .footer {
-            position: fixed;
+            position: relative;
             /* Fixed position at the bottom of the viewport */
             left: 0;
             bottom: 0;
@@ -430,12 +430,12 @@
                         <div class="w-auto p-8">
                             <ul class="-m-5 flex flex-wrap items-center">
                                 <li class="p-5">
-                                    <a class="font-medium text-gray-600 hover:text-gray-700" href="#">
+                                    <a class="font-medium text-gray-600 hover:text-gray-700" href="./privacypolicy.html">
                                         Privacy Policy
                                     </a>
                                 </li>
                                 <li class="p-5">
-                                    <a class="font-medium text-gray-600 hover:text-gray-700" href="#">
+                                    <a class="font-medium text-gray-600 hover:text-gray-700" href="./returnpolicy.html">
                                         Return Policy
                                     </a>
                                 </li>
@@ -562,15 +562,29 @@
                 cancelButtonText: 'No, keep it'
             }).then((result) => {
                 if (result.isConfirmed) {
-                    console.log('Order cancelled!');
-                    // Perform further actions here if user confirms
-                    disableCancelButton();
+                    console.log('Order cancelled for product with _id:', selectedOrderid);
+                    orderCancel(selectedOrderid)
                 } else {
-                    console.log('Cancellation declined.');
-                    // Handle cancellation decline
+                    console.log('Cancellation declined for product with _id:', selectedOrderid);
                 }
             });
         }
+
+        // ORDER-CANCEL-API
+        function orderCancel(selectedOrderid) {
+            fetch('http://localhost:5001/user/delete-order', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body:JSON.stringify({orderId:selectedOrderid})
+            })
+                .then(response => {
+                })
+                .catch(error => {
+                });
+        }
+
         // DISABLE-BUTTON
         function disableCancelButton() {
             var cancelButton = document.getElementById('cancelButton');
@@ -694,7 +708,7 @@
 
         // ---------------------------------------------------------
         // ORDER LISTING 
-        var selectedProductid
+        var selectedOrderid
         var user = []
         getOrders()
         function getOrders() {
@@ -707,6 +721,7 @@
                     user = data
                     console.log(user);
                     showOrders()
+                    
                 })
                 .catch(error => {
                     console.error("the error is:", error);
@@ -749,11 +764,11 @@
 
                 const td2 = document.createElement("td");
                 td2.classList.add("px-6", "py-4");
-                td2.textContent = item.orderedDate.slice(0, 10); // You should retrieve the appropriate data here
+                td2.textContent = item.orderedDate.slice(0, 10);
 
                 const td3 = document.createElement("td");
                 td3.classList.add("px-6", "py-4");
-                td3.textContent = item.deliveredDate.slice(0, 10); // You should retrieve the appropriate data here
+                td3.textContent = item.deliveredDate.slice(0, 10);
 
                 const td4 = document.createElement("td");
                 td4.classList.add("whitespace-nowrap", "px-4", "py-4");
@@ -776,9 +791,10 @@
                 const button = document.createElement("button");
                 button.id = "cancelButton";
                 button.textContent = "Cancel";
+                button.style = item.isCancelled ? "background-color: #34D399" : "background-color: #EF4444";
                 button.classList.add("bg-red-500", "hover:bg-red-600", "text-white", "font-bold", "py-2", "px-4", "rounded", "focus:outline-none", "focus:shadow-outline");
-                button.onclick = confirmCancel; // Assuming confirmCancel is a defined function
-
+                button.onclick = confirmCancel;
+                selectedOrderid = item._id
                 td5.appendChild(button);
 
                 row.appendChild(td1);

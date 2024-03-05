@@ -442,8 +442,13 @@
                                 </div>
                                 <!-- / Menswear dropdown menu-->
                             </li>
+                                                       <li class="nav-item">
+                                <a class="nav-link" href="./locate_us.html" role="button">
+                                    LOCATE US
+                                </a>
+                            </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="./category.html" role="button">
+                                <a class="nav-link" href="./all_categories.html" role="button">
                                     Categories
                                 </a>
                             </li>
@@ -956,11 +961,14 @@
         }
         function setCatData(category) {
             const categorylisting = document.getElementById("categorylist");
+            const newchecked = params.get("cat");
+            const defaultCheckedValues = decodeURIComponent(newchecked)
+
             categorylisting.innerHTML = "";
             category.forEach((element, index) => {
                 const categoryDiv = document.createElement("div")
                 categoryDiv.className = "form-group form-check-custom mb-1"
-                categoryDiv.innerHTML = `<input type="checkbox" class="form-check-input" value=${element.categoryName}  id="filter-brands-modal-${index}">
+                categoryDiv.innerHTML = `<input type="checkbox" class="form-check-input" value=${encodeURIComponent(element.categoryName)}  id="filter-brands-modal-${index}">
         <label class="form-check-label fw-normal text-body flex-grow-1 d-flex align-items-center"
         for="filter-brands-modal-${index}">${element.categoryName}<span class="text-muted ms-1 fs-9"></span></label>`
 
@@ -968,7 +976,16 @@
                     filterCat(element.categoryName)
                 })
                 categorylisting.appendChild(categoryDiv);
+
             })
+            categorylisting.querySelectorAll('input[type="checkbox"]').forEach(function (checkbox) {
+                const checkboxValue=decodeURIComponent(checkbox.value)
+                console.log("checkbox",defaultCheckedValues,checkboxValue,(defaultCheckedValues===checkboxValue));
+                if (defaultCheckedValues===checkboxValue) {
+                    checkbox.checked = true;
+                    filterCat(checkboxValue)
+                }
+            });
 
         }
 

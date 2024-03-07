@@ -115,10 +115,14 @@
                     <div class="flex items-center justify-between">
                         <h4 class="text-xl text-gray-900 font-bold">Personal Info</h4>
                         <!-- Button to trigger the modal -->
-                        <button id="editButton"
+                        <!-- <button id="editButton"
                             class="text-blue-500 hover:text-blue-700 focus:outline-none bg-transparent border border-blue-500 hover:bg-blue-500 hover:text-white font-bold py-2 px-4 rounded transition duration-300 ease-in-out">
                             Edit
-                        </button>
+                        </button> -->
+                        <!-- <button onclick="logoutUser()"
+                            class="text-blue-500 hover:text-blue-700 focus:outline-none bg-transparent border border-blue-500 hover:bg-blue-500 hover:text-white font-bold py-2 px-4 rounded transition duration-300 ease-in-out">
+                            LOG OUT
+                        </button> -->
 
                         <!-- Modal -->
                         <div id="detailsModal"
@@ -430,7 +434,8 @@
                         <div class="w-auto p-8">
                             <ul class="-m-5 flex flex-wrap items-center">
                                 <li class="p-5">
-                                    <a class="font-medium text-gray-600 hover:text-gray-700" href="./privacypolicy.html">
+                                    <a class="font-medium text-gray-600 hover:text-gray-700"
+                                        href="./privacypolicy.html">
                                         Privacy Policy
                                     </a>
                                 </li>
@@ -500,6 +505,13 @@
             'Authorization': `Bearer ${token}`,
             'Content-Type': 'application/json'
         };
+
+        // LOGOUT-Function
+        // function logoutUser() {
+        //     localStorage.removeItem('token');
+
+        //     window.location.href = 'login.html';
+        // }
 
         // SHOW-USER_DETAILS
         const userFirstname = document.getElementById("userFirstname");
@@ -577,7 +589,7 @@
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body:JSON.stringify({orderId:selectedOrderid})
+                body: JSON.stringify({ orderId: selectedOrderid })
             })
                 .then(response => {
                 })
@@ -721,7 +733,7 @@
                     user = data
                     console.log(user);
                     showOrders()
-                    
+
                 })
                 .catch(error => {
                     console.error("the error is:", error);
